@@ -65,16 +65,14 @@
 <!-- SCRIPT NORMAL -->
 <!-- ===================== -->
 <script>
-const {
-  auth,
-  db,
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  doc,
-  setDoc,
-  getDoc
-} = window.firebaseApp;
+  const db = window.firebaseApp;
+  const signInWithPopup = window.firebaseApp;
+  const GoogleAuthProvider = window.firebaseApp;
+  const onAuthStateChanged = window.firebaseApp;
+  const doc = window.firebaseApp;
+  const setDoc = window.firebaseApp;
+  const getDoc = window.firebaseApp;
+
 
 const words = [
   "apple", "book", "computer", "language", "development",
@@ -183,8 +181,14 @@ function renderWords(savedWord) {
   };
 
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+    const db = window.firebaseApp;
+  const signInWithPopup = window.firebaseApp;
+  const GoogleAuthProvider = window.firebaseApp;
+  const onAuthStateChanged = window.firebaseApp;
+  const doc = window.firebaseApp;
+  const setDoc = window.firebaseApp;
+  const getDoc = window.firebaseApp;
+
 
   window.firebaseApp = {
     auth,
