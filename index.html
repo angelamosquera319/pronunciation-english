@@ -10,16 +10,8 @@
     padding: 40px;
     background-color: #f5f5f5;
   }
-
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  #login {
-    text-align: center;
-    margin-bottom: 30px;
-  }
+  h1 { text-align: center; }
+  #login { text-align: center; margin-bottom: 20px; }
 
   #wordList {
     display: grid;
@@ -28,17 +20,14 @@
   }
 
   .word-btn {
-    font-size: 16px;
-    background-color: white;
     border: 2px solid black;
-    border-radius: 5px;
+    padding: 10px;
+    background: white;
     cursor: pointer;
-    padding: 10px 15px;
-    text-align: center;
   }
 
   .word-btn.active {
-    border: 2px solid red;
+    border-color: red;
   }
 </style>
 </head>
@@ -54,7 +43,7 @@
 <div id="wordList"></div>
 
 <!-- ===================== -->
-<!-- FIREBASE MODULE (PRIMERO) -->
+<!-- FIREBASE (MODULE) -->
 <!-- ===================== -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -72,115 +61,90 @@
   } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
   const firebaseConfig = {
-    apiKey: "TU_API_KEY",
-    authDomain: "TU_AUTH_DOMAIN",
-    projectId: "TU_PROJECT_ID",
-    storageBucket: "TU_STORAGE_BUCKET",
-    messagingSenderId: "TU_SENDER_ID",
-    appId: "TU_APP_ID"
+    apiKey: "AIzaSyD36XPvB_ICTiDnFlasbv7GdATG950zPsA",
+  authDomain: "english-pronunciation-3dba5.firebaseapp.com",
+  projectId: "english-pronunciation-3dba5",
+  storageBucket: "english-pronunciation-3dba5.firebasestorage.app",
+  messagingSenderId: "956820967960",
+  appId: "1:956820967960:web:c7fcc6c3dc4de70a9ca96d"
   };
 
   const app = initializeApp(firebaseConfig);
-
-  // 🔥 AQUÍ se crean (NO desde window)
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  // 🔥 Exponer a window
-  window.firebaseApp = {
-    auth,
-    db,
-    signInWithPopup,
-    GoogleAuthProvider,
-    onAuthStateChanged,
-    doc,
-    setDoc,
-    getDoc
+  // 🔥 EXPONER SOLO FUNCIONES
+  window.firebaseAPI = {
+    login: async () => {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+    },
+
+    onUserChange: (callback) => {
+      onAuthStateChanged(auth, callback);
+    },
+
+    getLastWord: async (uid) => {
+      const snap = await getDoc(doc(db, "progress", uid));
+      return snap.exists() ? snap.data().lastWord : null;
+    },
+
+    saveWord: async (uid, word) => {
+      await setDoc(
+        doc(db, "progress", uid),
+        { lastWord: word },
+        { merge: true }
+      );
+    }
   };
 </script>
 
 <!-- ===================== -->
-<!-- SCRIPT NORMAL (DESPUÉS) -->
+<!-- SCRIPT NORMAL (UI) -->
 <!-- ===================== -->
 <script>
-  const {
-    auth,
-    db,
-    signInWithPopup,
-    GoogleAuthProvider,
-    onAuthStateChanged,
-    doc,
-    setDoc,
-    getDoc
-  } = window.firebaseApp;
-
   const words = [
-    "apple", "book", "computer", "language", "development",
-    "music", "internet", "design", "script", "browser",
-    "window", "document", "function", "variable", "button",
-    "audio", "server", "github", "mobile", "tablet"
+    "apple","book","computer","language","development",
+    "music","internet","design","script","browser"
   ];
 
   const container = document.getElementById("wordList");
   const loginBtn = document.getElementById("loginBtn");
-
-  let activeButton = null;
+  let activeBtn = null;
   let currentUser = null;
 
-  // ---------- LOGIN ----------
-  loginBtn.onclick = async () => {
-    const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
-  };
+  loginBtn.onclick = () => window.firebaseAPI.login();
 
-  // ---------- AUTH STATE ----------
-  onAuthStateChanged(auth, async user => {
+  window.firebaseAPI.onUserChange(async user => {
     if (!user) return;
 
     currentUser = user;
     loginBtn.style.display = "none";
 
-    const ref = doc(db, "progress", user.uid);
-    const snap = await getDoc(ref);
-    const savedWord = snap.exists() ? snap.data().lastWord : null;
-
-    renderWords(savedWord);
+    const saved = await window.firebaseAPI.getLastWord(user.uid);
+    render(saved);
   });
 
-  async function guardarUltimaPalabra(word) {
-    if (!currentUser) return;
-
-    await setDoc(
-      doc(db, "progress", currentUser.uid),
-      { lastWord: word },
-      { merge: true }
-    );
-  }
-
-  function renderWords(savedWord) {
+  function render(savedWord) {
     container.innerHTML = "";
 
     words.forEach(word => {
       const btn = document.createElement("button");
-      btn.className = "word-btn";
       btn.textContent = word;
+      btn.className = "word-btn";
 
       if (word === savedWord) {
         btn.classList.add("active");
-        activeButton = btn;
-
-        setTimeout(() => {
-          btn.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 100);
+        activeBtn = btn;
+        btn.scrollIntoView({ block: "center" });
       }
 
       btn.onclick = () => {
-        if (activeButton) activeButton.classList.remove("active");
-
+        if (activeBtn) activeBtn.classList.remove("active");
         btn.classList.add("active");
-        activeButton = btn;
+        activeBtn = btn;
 
-        guardarUltimaPalabra(word);
+        window.firebaseAPI.saveWord(currentUser.uid, word);
       };
 
       container.appendChild(btn);
