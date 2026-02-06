@@ -10,8 +10,11 @@
     padding: 40px;
     background-color: #f5f5f5;
   }
-  h1 { text-align: center; }
-  #login { text-align: center; margin-bottom: 20px; }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
 
   #wordList {
     display: grid;
@@ -20,14 +23,21 @@
   }
 
   .word-btn {
+    font-size: 16px;
+    background-color: white;
     border: 2px solid black;
-    padding: 10px;
-    background: white;
+    border-radius: 5px;
     cursor: pointer;
+    padding: 10px 15px;
+    text-align: center;
   }
 
   .word-btn.active {
-    border-color: red;
+    border: 2px solid red;
+  }
+
+  .word-btn:hover {
+    background-color: #f0f0f0;
   }
 </style>
 </head>
@@ -35,122 +45,52 @@
 <body>
 
 <h1>Click a word to hear pronunciation</h1>
-
-<div id="login">
-  <button id="loginBtn">Login with Google</button>
-</div>
-
 <div id="wordList"></div>
 
-<!-- ===================== -->
-<!-- FIREBASE (MODULE) -->
-<!-- ===================== -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import {
-    getAuth,
-    signInWithPopup,
-    GoogleAuthProvider,
-    onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  import {
-    getFirestore,
-    doc,
-    setDoc,
-    getDoc
-  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyD36XPvB_ICTiDnFlasbv7GdATG950zPsA",
-  authDomain: "english-pronunciation-3dba5.firebaseapp.com",
-  projectId: "english-pronunciation-3dba5",
-  storageBucket: "english-pronunciation-3dba5.firebasestorage.app",
-  messagingSenderId: "956820967960",
-  appId: "1:956820967960:web:c7fcc6c3dc4de70a9ca96d"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  // 🔥 EXPONER SOLO FUNCIONES
-  window.firebaseAPI = {
-    login: async () => {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-    },
-
-    onUserChange: (callback) => {
-      onAuthStateChanged(auth, callback);
-    },
-
-    getLastWord: async (uid) => {
-      const snap = await getDoc(doc(db, "progress", uid));
-      return snap.exists() ? snap.data().lastWord : null;
-    },
-
-    saveWord: async (uid, word) => {
-      await setDoc(
-        doc(db, "progress", uid),
-        { lastWord: word },
-        { merge: true }
-      );
-    }
-  };
-</script>
-
-<!-- ===================== -->
-<!-- SCRIPT NORMAL (UI) -->
-<!-- ===================== -->
 <script>
-  const words = [
-    "apple","book","computer","language","development",
-    "music","internet","design","script","browser"
-  ];
+const words = [
+  "apple","book","computer","language","development",
+  "music","internet","design","script","browser",
+  "window","document","function","variable","button",
+  "audio","server","github","mobile","tablet"
+];
 
-  const container = document.getElementById("wordList");
-  const loginBtn = document.getElementById("loginBtn");
+const container = document.getElementById("wordList");
+let activeBtn = null;
 
-  let activeBtn = null;
-  let currentUser = null;
+// 👉 prioridad: URL > localStorage
+const params = new URLSearchParams(window.location.search);
+const savedWord = params.get("word") || localStorage.getItem("lastWord");
 
-  loginBtn.onclick = () => window.firebaseAPI.login();
+words.forEach(word => {
+  const btn = document.createElement("button");
+  btn.className = "word-btn";
+  btn.textContent = word;
 
-  window.firebaseAPI.onUserChange(async user => {
-    if (!user) return;
-
-    currentUser = user;
-    loginBtn.style.display = "none";
-
-    const saved = await window.firebaseAPI.getLastWord(user.uid);
-    render(saved);
-  });
-
-  function render(savedWord) {
-    container.innerHTML = "";
-
-    words.forEach(word => {
-      const btn = document.createElement("button");
-      btn.textContent = word;
-      btn.className = "word-btn";
-
-      if (word === savedWord) {
-        btn.classList.add("active");
-        activeBtn = btn;
-        btn.scrollIntoView({ block: "center" });
-      }
-
-      btn.onclick = () => {
-        if (activeBtn) activeBtn.classList.remove("active");
-        btn.classList.add("active");
-        activeBtn = btn;
-
-        window.firebaseAPI.saveWord(currentUser.uid, word);
-      };
-
-      container.appendChild(btn);
-    });
+  if (word === savedWord) {
+    btn.classList.add("active");
+    activeBtn = btn;
+    setTimeout(() => {
+      btn.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
   }
+
+  btn.onclick = () => {
+    if (activeBtn) activeBtn.classList.remove("active");
+
+    btn.classList.add("active");
+    activeBtn = btn;
+
+    localStorage.setItem("lastWord", word);
+
+    // 👉 sincronizable por link
+    history.replaceState(null, "", "?word=" + word);
+
+    btn.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
+  container.appendChild(btn);
+});
 </script>
 
 </body>
