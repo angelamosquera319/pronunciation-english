@@ -32,9 +32,9 @@
         text-align: center;
     }
 
-.word-btn.active {
-    border: 2px solid red;
-}
+    .word-btn.active {
+        border: 2px solid red;
+    }
 
     .word-btn:hover {
         background-color: #f0f0f0;
@@ -63,17 +63,48 @@ const words = [
 const container = document.getElementById("wordList");
 let activeButton = null;
 
+// 🔹 prioridad: URL > localStorage
+const params = new URLSearchParams(window.location.search);
+const savedWord = params.get("word") || localStorage.getItem("lastWord");
+
 words.forEach(word => {
   const btn = document.createElement("button");
   btn.className = "word-btn";
   btn.textContent = word;
 
+  // 🔴 marcar última palabra
+  if (word === savedWord) {
+    btn.classList.add("active");
+    activeButton = btn;
+
+    // scroll automático
+    setTimeout(() => {
+      btn.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }, 100);
+  }
+
   btn.onclick = () => {
     if (activeButton) {
       activeButton.classList.remove("active");
     }
+
     btn.classList.add("active");
     activeButton = btn;
+
+    // 💾 guardar progreso
+    localStorage.setItem("lastWord", word);
+
+    // 🔗 actualizar URL (sin recargar)
+    history.replaceState(null, "", "?word=" + word);
+
+    // scroll al centro
+    btn.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
   };
 
   container.appendChild(btn);
