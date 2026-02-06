@@ -2,91 +2,78 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>English Pronunciation</title>
+<title>Pronunciation – Preview</title>
 
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    padding: 40px;
-    background-color: #f5f5f5;
-  }
+    body {
+        font-family: Arial, sans-serif;
+        padding: 40px;
+        background-color: #f5f5f5;
+    }
 
-  h1 {
-    text-align: center;
-    margin-bottom: 30px;
-  }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-  #wordList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 15px;
-  }
+    #wordList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+    }
 
-  .word-btn {
-    font-size: 16px;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 10px 15px;
-    text-align: center;
-  }
+    .word-btn {
+        font-size: 16px;
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 10px 15px;
+        text-align: center;
+    }
 
-  .word-btn.active {
+.word-btn.active {
     border: 2px solid red;
-  }
+}
 
-  .word-btn:hover {
-    background-color: #f0f0f0;
-  }
+    .word-btn:hover {
+        background-color: #f0f0f0;
+    }
+
+    .word-btn:active {
+        transform: scale(0.97);
+    }
 </style>
 </head>
 
 <body>
 
 <h1>Click a word to hear pronunciation</h1>
+
 <div id="wordList"></div>
 
 <script>
 const words = [
-  "apple","book","computer","language","development",
-  "music","internet","design","script","browser",
-  "window","document","function","variable","button",
-  "audio","server","github","mobile","tablet"
+  "apple", "book", "computer", "language", "development",
+  "music", "internet", "design", "script", "browser",
+  "window", "document", "function", "variable", "button",
+  "audio", "server", "github", "mobile", "tablet"
 ];
 
 const container = document.getElementById("wordList");
-let activeBtn = null;
-
-// 👉 prioridad: URL > localStorage
-const params = new URLSearchParams(window.location.search);
-const savedWord = params.get("word") || localStorage.getItem("lastWord");
+let activeButton = null;
 
 words.forEach(word => {
   const btn = document.createElement("button");
   btn.className = "word-btn";
   btn.textContent = word;
 
-  if (word === savedWord) {
-    btn.classList.add("active");
-    activeBtn = btn;
-    setTimeout(() => {
-      btn.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 100);
-  }
-
   btn.onclick = () => {
-    if (activeBtn) activeBtn.classList.remove("active");
-
+    if (activeButton) {
+      activeButton.classList.remove("active");
+    }
     btn.classList.add("active");
-    activeBtn = btn;
-
-    localStorage.setItem("lastWord", word);
-
-    // 👉 sincronizable por link
-    history.replaceState(null, "", "?word=" + word);
-
-    btn.scrollIntoView({ behavior: "smooth", block: "center" });
+    activeButton = btn;
   };
 
   container.appendChild(btn);
