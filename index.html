@@ -65,6 +65,7 @@
 <!-- SCRIPT NORMAL -->
 <!-- ===================== -->
 <script>
+  const auth = window.firebaseApp;
   const db = window.firebaseApp;
   const signInWithPopup = window.firebaseApp;
   const GoogleAuthProvider = window.firebaseApp;
@@ -181,7 +182,8 @@ function renderWords(savedWord) {
   };
 
   const app = initializeApp(firebaseConfig);
-    const db = window.firebaseApp;
+  const auth = window.firebaseApp;
+  const db = window.firebaseApp;
   const signInWithPopup = window.firebaseApp;
   const GoogleAuthProvider = window.firebaseApp;
   const onAuthStateChanged = window.firebaseApp;
