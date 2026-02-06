@@ -57,20 +57,33 @@ const words = [
   "apple", "book", "computer", "language", "development",
   "music", "internet", "design", "script", "browser",
   "window", "document", "function", "variable", "button",
-  "audio", "server", "github", "mobile", "tablet", "aaaaaaa"
+  "audio", "server", "github", "mobile", "tablet"
 ];
 
 const container = document.getElementById("wordList");
 let activeButton = null;
-let currentAudio = null;
+let audioPlayer = new Audio(); // ✅ UN solo reproductor
+
+// 🔹 prioridad: URL > localStorage
+const params = new URLSearchParams(window.location.search);
+const savedWord = params.get("word") || localStorage.getItem("lastWord");
 
 words.forEach(word => {
   const btn = document.createElement("button");
   btn.className = "word-btn";
   btn.textContent = word;
 
+  // 🔴 marcar última palabra
+  if (word === savedWord) {
+    btn.classList.add("active");
+    activeButton = btn;
+
+    setTimeout(() => {
+      btn.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
+  }
+
   btn.onclick = () => {
-    // quitar activo anterior
     if (activeButton) {
       activeButton.classList.remove("active");
     }
@@ -78,18 +91,22 @@ words.forEach(word => {
     btn.classList.add("active");
     activeButton = btn;
 
-    // detener audio anterior
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
-    }
+    // 💾 guardar progreso
+    localStorage.setItem("lastWord", word);
 
-    // reproducir audio
-    currentAudio = new Audio(`audio/${word}.mp3`);
-    currentAudio.play().catch(err => {
-      console.error("No se pudo reproducir el audio:", err);
-      alert(`No existe el audio para: ${word}`);
+    // 🔗 actualizar URL
+    history.replaceState(null, "", "?word=" + word);
+
+    // 🔊 reproducir audio
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+    audioPlayer.src = `audio/${word}.m4a`;
+
+    audioPlayer.play().catch(() => {
+      alert(`No se encontró el audio: audio/${word}.m4a`);
     });
+
+    btn.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   container.appendChild(btn);
