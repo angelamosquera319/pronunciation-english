@@ -98,10 +98,10 @@ words.forEach(word => {
     // 🔊 reproducir audio
     audioPlayer.pause();
     audioPlayer.currentTime = 0;
-    audioPlayer.src = `audio/${word}.m4a`;
+    audioPlayer.src = `audio/${word}.mp3`;
 
     audioPlayer.play().catch(() => {
-      alert(`No se encontró el audio: audio/${word}.m4a`);
+      alert(`No se encontró el audio: audio/${word}.mp3`);
     });
 
     btn.scrollIntoView({ behavior: "smooth", block: "center" });
