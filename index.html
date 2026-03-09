@@ -99,15 +99,15 @@ words.forEach(word => {
     // 🔗 actualizar URL
     history.replaceState(null, "", "?word=" + word);
 
-    // 🔊 reproducir audio
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
-    audioPlayer.src = `audio/${word}.mp3`;
-
-    audioPlayer.play().catch(() => {
-      alert(`No se encontró el audio: audio/${word}.mp3`);
-    });
-
+// 🔊 reproducir audio - VERSIÓN MEJORADA
+audioPlayer.pause();
+audioPlayer.src = "";           // 👈 libera el stream anterior completamente
+audioPlayer.load();             // 👈 resetea el elemento de audio
+audioPlayer.src = `audio/${word}.mp3`;
+audioPlayer.load();             // 👈 precarga el nuevo archivo
+audioPlayer.play().catch(() => {
+  alert(`No se encontró el audio: audio/${word}.mp3`);
+});
     btn.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
