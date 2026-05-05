@@ -68,8 +68,9 @@
     raro: []
   };
 
-  const savedWord = new URLSearchParams(window.location.search).get("word") || localStorage.getItem("lastWord");
-  const savedTab  = localStorage.getItem("lastTab") || "basico";
+  const params    = new URLSearchParams(window.location.search);
+  const savedWord = params.get("word") || localStorage.getItem("lastWord");
+  const savedTab  = params.get("tab")  || localStorage.getItem("lastTab") || "basico";
 
   let currentTab   = savedTab;
   let activeButton = null;
@@ -104,9 +105,10 @@
         if (activeButton) activeButton.classList.remove("active");
         btn.classList.add("active");
         activeButton = btn;
+
         localStorage.setItem("lastWord", word);
-        localStorage.setItem("lastTab", currentTab);  // 👈 guarda el tab
-        history.replaceState(null, "", "?word=" + word);
+        localStorage.setItem("lastTab", currentTab);
+        history.replaceState(null, "", `?tab=${currentTab}&word=${word}`);
 
         audioPlayer.pause();
         audioPlayer.src = "";
@@ -120,7 +122,6 @@
     });
   }
 
-  // Arranca en el tab guardado
   const initialTabBtn = document.querySelector(`.tab-btn[data-tab="${savedTab}"]`);
   showTab(savedTab, initialTabBtn);
 </script>
