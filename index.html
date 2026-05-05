@@ -1,17 +1,123 @@
-.tab-btn {
-  font-size: 15px;
-  padding: 8px 0;
-  border: none;
-  border-bottom: 2.5px solid transparent;
-  margin-bottom: -1.5px;
-  background: none;        /* sin fondo */
-  cursor: pointer;
-  color: #888;
-  outline: none;           /* sin borde de foco */
-}
-.tab-btn.active {
-  color: black;
-  border-bottom-color: black;
-  font-weight: 600;
-}
-.tab-btn:hover:not(.active) { color: black; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pronunciation</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; background-color: #f5f5f5; }
+
+    .tab-bar {
+      display: flex;
+      border-bottom: 2px solid #ccc;
+      margin-bottom: 24px;
+    }
+    .tab-btn {
+      font-size: 15px;
+      padding: 10px 24px;
+      border: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      background: transparent;
+      cursor: pointer;
+      color: #888;
+    }
+    .tab-btn.active {
+      color: black;
+      border-bottom: 3px solid black;
+      font-weight: 600;
+    }
+    .tab-btn:hover:not(.active) { color: black; background: #f0f0f0; }
+
+    #wordList {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+    }
+    .word-btn {
+      font-size: 20px; background-color: white;
+      border: 2px solid black; border-radius: 5px;
+      cursor: pointer; padding: 10px 15px; text-align: center;
+    }
+    .word-btn.active { border-color: red; color: red; }
+    .word-btn:hover { background-color: #f0f0f0; }
+    .word-btn:active { transform: scale(0.97); }
+    .empty { color: #999; font-style: italic; padding: 20px 0; }
+  </style>
+</head>
+<body>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('basico', this)">Básico</button>
+  <button class="tab-btn" onclick="showTab('util', this)">Útil</button>
+  <button class="tab-btn" onclick="showTab('poco', this)">Poco común</button>
+  <button class="tab-btn" onclick="showTab('raro', this)">Raro</button>
+</div>
+
+<div id="wordList"></div>
+
+<script>
+  const categories = {
+    basico: [
+      "Aa","Bb","Cc","Dd","Ee","Ff","Gg","Hh","Ii","Jj","Kk","Ll","Mm",
+      "Nn","Oo","Pp","Qq","Rr","Ss","Tt","Uu","Vv","Ww","Xx","Yy","Zz",
+      "you","one","minute","first","he","ones","minutes","firsts",
+      "she","two","minuted","second","it","twos","minuting","seconds",
+      "we","three","hour","seconded","they","threes","hours","seconding",
+      "me","four","dawn","third"
+    ],
+    util: [],
+    poco: [],
+    raro: []
+  };
+
+  let activeButton = null;
+  let audioPlayer = new Audio();
+  const savedWord = new URLSearchParams(window.location.search).get("word") || localStorage.getItem("lastWord");
+
+  function showTab(tab, clickedTab) {
+    document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+    clickedTab.classList.add('active');
+
+    const container = document.getElementById("wordList");
+    container.innerHTML = "";
+    const words = categories[tab];
+
+    if (!words.length) {
+      container.innerHTML = '<p class="empty">No hay palabras en esta categoría aún.</p>';
+      return;
+    }
+
+    words.forEach(word => {
+      const btn = document.createElement("button");
+      btn.className = "word-btn";
+      btn.textContent = word;
+
+      if (word === savedWord) {
+        btn.classList.add("active");
+        activeButton = btn;
+        setTimeout(() => btn.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+      }
+
+      btn.onclick = () => {
+        if (activeButton) activeButton.classList.remove("active");
+        btn.classList.add("active");
+        activeButton = btn;
+        localStorage.setItem("lastWord", word);
+        history.replaceState(null, "", "?word=" + word);
+
+        audioPlayer.pause();
+        audioPlayer.src = "";
+        audioPlayer.load();
+        audioPlayer.src = `audio/${word}.mp3`;
+        audioPlayer.load();
+        audioPlayer.play().catch(() => alert(`No se encontró el audio: audio/${word}.mp3`));
+      };
+
+      container.appendChild(btn);
+    });
+  }
+
+  showTab('basico', document.querySelector('.tab-btn.active'));
+</script>
+</body>
+</html>
