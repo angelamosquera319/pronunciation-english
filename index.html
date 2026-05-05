@@ -47,10 +47,10 @@
 <body>
 
 <div class="tab-bar">
-  <button class="tab-btn active" onclick="showTab('basico', this)">Básico</button>
-  <button class="tab-btn" onclick="showTab('util', this)">Útil</button>
-  <button class="tab-btn" onclick="showTab('poco', this)">Poco común</button>
-  <button class="tab-btn" onclick="showTab('raro', this)">Raro</button>
+  <button class="tab-btn" data-tab="basico" onclick="showTab('basico', this)">Básico</button>
+  <button class="tab-btn" data-tab="util" onclick="showTab('util', this)">Útil</button>
+  <button class="tab-btn" data-tab="poco" onclick="showTab('poco', this)">Poco común</button>
+  <button class="tab-btn" data-tab="raro" onclick="showTab('raro', this)">Raro</button>
 </div>
 
 <div id="wordList"></div>
@@ -70,11 +70,16 @@
     raro: []
   };
 
+  const params = new URLSearchParams(window.location.search);
+  const savedWord = params.get("word") || localStorage.getItem("lastWord");
+  const savedTab  = localStorage.getItem("lastTab") || "basico";
+
+  let currentTab   = savedTab;
   let activeButton = null;
-  let audioPlayer = new Audio();
-  const savedWord = new URLSearchParams(window.location.search).get("word") || localStorage.getItem("lastWord");
+  let audioPlayer  = new Audio();
 
   function showTab(tab, clickedTab) {
+    currentTab = tab;
     document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
     clickedTab.classList.add('active');
 
@@ -102,7 +107,9 @@
         if (activeButton) activeButton.classList.remove("active");
         btn.classList.add("active");
         activeButton = btn;
+
         localStorage.setItem("lastWord", word);
+        localStorage.setItem("lastTab", currentTab);
         history.replaceState(null, "", "?word=" + word);
 
         audioPlayer.pause();
@@ -117,7 +124,9 @@
     });
   }
 
-  showTab('basico', document.querySelector('.tab-btn.active'));
+  // Inicializar en el tab guardado
+  const initialTabBtn = document.querySelector(`.tab-btn[data-tab="${savedTab}"]`);
+  showTab(savedTab, initialTabBtn);
 </script>
 </body>
 </html>
