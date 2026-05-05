@@ -5,7 +5,6 @@
   <title>Pronunciation</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 40px; background-color: #f5f5f5; }
-
     .tab-bar {
       display: flex;
       border-bottom: 2px solid #ccc;
@@ -27,7 +26,6 @@
       font-weight: 600;
     }
     .tab-btn:hover:not(.active) { color: black; background: #f0f0f0; }
-
     #wordList {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -70,8 +68,7 @@
     raro: []
   };
 
-  const params = new URLSearchParams(window.location.search);
-  const savedWord = params.get("word") || localStorage.getItem("lastWord");
+  const savedWord = new URLSearchParams(window.location.search).get("word") || localStorage.getItem("lastWord");
   const savedTab  = localStorage.getItem("lastTab") || "basico";
 
   let currentTab   = savedTab;
@@ -107,9 +104,8 @@
         if (activeButton) activeButton.classList.remove("active");
         btn.classList.add("active");
         activeButton = btn;
-
         localStorage.setItem("lastWord", word);
-        localStorage.setItem("lastTab", currentTab);
+        localStorage.setItem("lastTab", currentTab);  // 👈 guarda el tab
         history.replaceState(null, "", "?word=" + word);
 
         audioPlayer.pause();
@@ -124,7 +120,7 @@
     });
   }
 
-  // Inicializar en el tab guardado
+  // Arranca en el tab guardado
   const initialTabBtn = document.querySelector(`.tab-btn[data-tab="${savedTab}"]`);
   showTab(savedTab, initialTabBtn);
 </script>
