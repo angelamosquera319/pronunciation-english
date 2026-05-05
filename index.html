@@ -1,115 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Pronunciation</title>
+  <meta charset="UTF-8">
+  <title>Pronunciation</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; background-color: #f5f5f5; }
+    h1 { text-align: center; margin-bottom: 20px; }
 
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    padding: 40px;
-    background-color: #f5f5f5;
-  }
+    #tabs { display: flex; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; }
+    .tab-btn {
+      font-size: 16px; padding: 8px 22px;
+      background: white; border: 2px solid #ccc;
+      border-radius: 6px; cursor: pointer;
+    }
+    .tab-btn.active { border-color: black; font-weight: bold; background: #eee; }
+    .tab-btn:hover:not(.active) { background: #f0f0f0; }
 
-  h1 {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-
-  #wordList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 15px;
-  }
-
-  .word-btn {
-    font-size: 20px;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 10px 15px;
-    text-align: center;
-  }
-
-  .word-btn.active {
-    border: 2px solid red;
-  }
-
-  .word-btn:hover {
-    background-color: #f0f0f0;
-  }
-
-  .word-btn:active {
-    transform: scale(0.97);
-  }
-</style>
+    #wordList {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+    }
+    .word-btn {
+      font-size: 20px; background-color: white;
+      border: 2px solid black; border-radius: 5px;
+      cursor: pointer; padding: 10px 15px; text-align: center;
+    }
+    .word-btn.active { border: 2px solid red; }
+    .word-btn:hover { background-color: #f0f0f0; }
+    .word-btn:active { transform: scale(0.97); }
+    .empty { color: #999; font-style: italic; padding: 20px 0; }
+  </style>
 </head>
-
 <body>
+
+<div id="tabs">
+  <button class="tab-btn active" onclick="showTab('basico', this)">Básico</button>
+  <button class="tab-btn" onclick="showTab('util', this)">Útil</button>
+  <button class="tab-btn" onclick="showTab('poco', this)">Poco común</button>
+  <button class="tab-btn" onclick="showTab('raro', this)">Raro</button>
+</div>
 
 <div id="wordList"></div>
 
 <script>
-const words = 
-[
-  "Aa", "Bb", "Cc", "Dd", "Ee", "Ff", "Gg", "Hh", "Ii", "Jj", "Kk", "Ll", "Mm", "Nn", "Oo", "Pp", "Qq", "Rr", "Ss", "Tt", "Uu",
-  "Vv", "Ww", "Xx", "Yy", "Zz", "you", "one", "minute", "first", "he", "ones", "minutes", "firsts", "she", "two", "minuted", "second",
-  "it", "twos", "minuting", "seconds", "we", "three", "hour", "seconded", "they", "threes", "hours", "seconding", "me", "four", "dawn",
-  "third"
-];
+  const categories = {
+    basico: [
+      "Aa","Bb","Cc","Dd","Ee","Ff","Gg","Hh","Ii","Jj","Kk","Ll","Mm",
+      "Nn","Oo","Pp","Qq","Rr","Ss","Tt","Uu","Vv","Ww","Xx","Yy","Zz",
+      "you","one","minute","first","he","ones","minutes","firsts",
+      "she","two","minuted","second","it","twos","minuting","seconds",
+      "we","three","hour","seconded","they","threes","hours","seconding",
+      "me","four","dawn","third"
+    ],
+    util: [
+      // Agrega aquí palabras útiles
+    ],
+    poco: [
+      // Agrega aquí palabras poco comunes
+    ],
+    raro: [
+      // Agrega aquí palabras raras
+    ]
+  };
 
-const container = document.getElementById("wordList");
-let activeButton = null;
-let audioPlayer = new Audio(); // ✅ UN solo reproductor
+  let currentTab = 'basico';
+  let activeButton = null;
+  let audioPlayer = new Audio();
 
-// 🔹 prioridad: URL > localStorage
-const params = new URLSearchParams(window.location.search);
-const savedWord = params.get("word") || localStorage.getItem("lastWord");
+  const params = new URLSearchParams(window.location.search);
+  const savedWord = params.get("word") || localStorage.getItem("lastWord");
 
-words.forEach(word => {
-  const btn = document.createElement("button");
-  btn.className = "word-btn";
-  btn.textContent = word;
-
-  // 🔴 marcar última palabra
-  if (word === savedWord) {
-    btn.classList.add("active");
-    activeButton = btn;
-
-    setTimeout(() => {
-      btn.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 100);
+  function showTab(tab, clickedBtn) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    clickedBtn.classList.add('active');
+    renderWords();
   }
 
-  btn.onclick = () => {
-    if (activeButton) {
-      activeButton.classList.remove("active");
+  function renderWords() {
+    const container = document.getElementById("wordList");
+    container.innerHTML = "";
+    const words = categories[currentTab];
+
+    if (!words.length) {
+      container.innerHTML = '<p class="empty">No hay palabras en esta categoría aún.</p>';
+      return;
     }
 
-    btn.classList.add("active");
-    activeButton = btn;
+    words.forEach(word => {
+      const btn = document.createElement("button");
+      btn.className = "word-btn";
+      btn.textContent = word;
 
-    // 💾 guardar progreso
-    localStorage.setItem("lastWord", word);
+      if (word === savedWord) {
+        btn.classList.add("active");
+        activeButton = btn;
+        setTimeout(() => btn.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+      }
 
-    // 🔗 actualizar URL
-    history.replaceState(null, "", "?word=" + word);
+      btn.onclick = () => {
+        if (activeButton) activeButton.classList.remove("active");
+        btn.classList.add("active");
+        activeButton = btn;
+        localStorage.setItem("lastWord", word);
+        history.replaceState(null, "", "?word=" + word);
 
-// 🔊 reproducir audio - VERSIÓN MEJORADA
-audioPlayer.pause();
-audioPlayer.src = "";           // 👈 libera el stream anterior completamente
-audioPlayer.load();             // 👈 resetea el elemento de audio
-audioPlayer.src = `audio/${word}.mp3`;
-audioPlayer.load();             // 👈 precarga el nuevo archivo
-audioPlayer.play().catch(() => {
-  alert(`No se encontró el audio: audio/${word}.mp3`);
-});
-};
+        audioPlayer.pause();
+        audioPlayer.src = "";
+        audioPlayer.load();
+        audioPlayer.src = `audio/${word}.mp3`;
+        audioPlayer.load();
+        audioPlayer.play().catch(() => {
+          alert(`No se encontró el audio: audio/${word}.mp3`);
+        });
+      };
 
-  container.appendChild(btn);
-});
+      container.appendChild(btn);
+    });
+  }
+
+  renderWords();
 </script>
-
 </body>
 </html>
