@@ -13,7 +13,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-image: url('fondo de pantalla frase lineas azul.png');
+      background-image: url('fondo_de_pantalla_frase_lineas_azul.png');
       background-size: cover;
       background-position: center;
     }
@@ -45,12 +45,32 @@
       margin-bottom: 12px;
     }
 
+    .word-text {
+      font-size: 15px;
+      color: #1a3a55;
+      line-height: 1.55;
+    }
+    .word-text strong { font-weight: 700; color: #0f2a40; }
+
+    .def-block {
+      margin-bottom: 12px;
+    }
+    .def-block:last-child { margin-bottom: 0; }
+
+    .def-text {
+      font-size: 15px;
+      color: #1a3a55;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+    .def-text strong { font-weight: 700; color: #0f2a40; }
+
     .word-example {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      padding: 8px 0 4px;
+      padding: 6px 0 2px;
     }
     .example-audio-row {
       display: flex;
@@ -68,6 +88,12 @@
       font-style: italic;
       color: #4a6a85;
       text-align: center;
+    }
+
+    .def-divider {
+      border: none;
+      border-top: 1px dashed rgba(100, 140, 180, 0.3);
+      margin: 12px 0;
     }
 
     .play-btn {
@@ -88,16 +114,6 @@
       border-color: #3a7ab0;
       color: #1a4a70;
     }
-
-    .word-text {
-      font-size: 15px;
-      color: #1a3a55;
-      line-height: 1.55;
-    }
-    .word-text strong { font-weight: 700; color: #0f2a40; }
-
-
-
     .def-btn { margin-top: 2px; }
   </style>
 </head>
@@ -111,24 +127,42 @@
   const words = [
     {
       word: "Carrots",
-      def: 'Como sustantivo plural de <strong>carrot</strong>, vegetal de color naranja, largo y con forma cónica, que crece bajo la tierra y se consume como alimento <em>(zanahoria)</em>.',
-      example: 'She added <strong>carrots</strong> to the soup.',
-      translation: '(Ella le agregó zanahorias a la sopa.)',
-      exampleFile: 'carrots_example'
+      definitions: [
+        {
+          def: 'Como sustantivo plural de <strong>carrot</strong>, vegetal de color naranja, largo y con forma cónica, que crece bajo la tierra y se consume como alimento <em>(zanahoria)</em>.',
+          example: 'She added <strong>carrots</strong> to the soup.',
+          translation: '(Ella le agregó zanahorias a la sopa.)',
+          exampleFile: 'carrots_example'
+        }
+      ]
+    },
+    {
+      word: "Lay",
+      definitions: [
+        {
+          def: 'Como verbo en pasado simple de <strong>to lay</strong> <em>(poner, colocar)</em>, se refiere a la acción de haber puesto o colocado algo sobre una superficie de manera cuidadosa o deliberada, y sus traducciones son <em>puso, colocó</em>.',
+          example: 'She <strong>lay</strong> the book on the table.',
+          translation: '(Ella colocó el libro sobre la mesa.)',
+          exampleFile: 'lay_example1'
+        },
+        {
+          def: 'Y como pasado simple de <strong>to lie</strong> <em>(yacer, acostarse)</em>, se refiere a la acción de haberse recostado o permanecido en posición horizontal sobre una superficie, y sus traducciones son <em>yació, se acostó</em>.',
+          example: 'He <strong>lay</strong> on the bed all afternoon.',
+          translation: '(Él estuvo acostado en la cama toda la tarde.)',
+          exampleFile: 'lay_example2'
+        }
+      ]
     },
     {
       word: "Minutes",
-      def: 'Plural de <strong>minute</strong>. Unidad de tiempo equivalente a 60 segundos <em>(minutos)</em>.',
-      example: 'Wait five <strong>minutes</strong>, please.',
-      translation: '(Espera cinco minutos, por favor.)',
-      exampleFile: 'minutes_example'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: 'The flight takes three <strong>hours</strong>.',
-      translation: '(El vuelo dura tres horas.)',
-      exampleFile: 'hours_example'
+      definitions: [
+        {
+          def: 'Plural de <strong>minute</strong>. Unidad de tiempo equivalente a 60 segundos <em>(minutos)</em>.',
+          example: 'Wait five <strong>minutes</strong>, please.',
+          translation: '(Espera cinco minutos, por favor.)',
+          exampleFile: 'minutes_example'
+        }
+      ]
     }
   ];
 
@@ -184,42 +218,61 @@
     entry.className = "word-entry";
     entry.dataset.word = w.word;
 
-
-
+    // Word title + audio button
     const defBtn = makePlayBtn(`audio/${w.word.toLowerCase()}.mp3`, "Reproducir " + w.word, w.word);
     defBtn.classList.add("def-btn");
 
-    const text = document.createElement("p");
-    text.className = "word-text";
-    text.innerHTML = `<strong>${w.word}:</strong> ${w.def}`;
+    const wordTitle = document.createElement("p");
+    wordTitle.className = "word-text";
+    wordTitle.innerHTML = `<strong>${w.word}</strong>`;
 
     const wordLine = document.createElement("div");
     wordLine.className = "word-line";
     wordLine.appendChild(defBtn);
-    wordLine.appendChild(text);
-
-    const exampleBtn = makePlayBtn(`audio/${w.exampleFile}.mp3`, "Reproducir ejemplo", w.word);
-
-    const sentence = document.createElement("p");
-    sentence.className = "example-sentence";
-    sentence.innerHTML = w.example;
-
-    const audioRow = document.createElement("div");
-    audioRow.className = "example-audio-row";
-    audioRow.appendChild(exampleBtn);
-    audioRow.appendChild(sentence);
-
-    const translation = document.createElement("p");
-    translation.className = "example-translation";
-    translation.textContent = w.translation;
-
-    const exBlock = document.createElement("div");
-    exBlock.className = "word-example";
-    exBlock.appendChild(audioRow);
-    exBlock.appendChild(translation);
-
+    wordLine.appendChild(wordTitle);
     entry.appendChild(wordLine);
-    entry.appendChild(exBlock);
+
+    // Definitions
+    w.definitions.forEach((d, i) => {
+      if (i > 0) {
+        const divider = document.createElement("hr");
+        divider.className = "def-divider";
+        entry.appendChild(divider);
+      }
+
+      const defBlock = document.createElement("div");
+      defBlock.className = "def-block";
+
+      const defText = document.createElement("p");
+      defText.className = "def-text";
+      defText.innerHTML = d.def;
+      defBlock.appendChild(defText);
+
+      // Example
+      const exampleBtn = makePlayBtn(`audio/${d.exampleFile}.mp3`, "Reproducir ejemplo", w.word);
+
+      const sentence = document.createElement("p");
+      sentence.className = "example-sentence";
+      sentence.innerHTML = d.example;
+
+      const audioRow = document.createElement("div");
+      audioRow.className = "example-audio-row";
+      audioRow.appendChild(exampleBtn);
+      audioRow.appendChild(sentence);
+
+      const translation = document.createElement("p");
+      translation.className = "example-translation";
+      translation.textContent = d.translation;
+
+      const exBlock = document.createElement("div");
+      exBlock.className = "word-example";
+      exBlock.appendChild(audioRow);
+      exBlock.appendChild(translation);
+
+      defBlock.appendChild(exBlock);
+      entry.appendChild(defBlock);
+    });
+
     document.getElementById("wordList").appendChild(entry);
   });
 
