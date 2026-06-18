@@ -8,15 +8,28 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, sans-serif;
-      padding: 32px 24px;
-      background-color: #f5f5f5;
+      min-height: 100vh;
+      background-image: url('fondo_de_pantalla_frase_lineas_azul.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding: 40px 24px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
       max-width: 680px;
       margin: 0 auto;
+      padding: 8px 24px;
     }
 
     .word-entry {
       padding: 16px 0;
-      border-bottom: 1px solid #e0e0e0;
+      border-bottom: 1px solid rgba(100, 140, 180, 0.2);
     }
     .word-entry:last-child { border-bottom: none; }
 
@@ -32,44 +45,46 @@
       margin-top: 2px;
       width: 30px; height: 30px;
       border-radius: 50%;
-      border: 1.5px solid #ccc;
-      background: white;
+      border: 1.5px solid rgba(80, 120, 170, 0.5);
+      background: rgba(255, 255, 255, 0.7);
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      color: #333;
+      color: #3a6080;
       font-size: 13px;
       transition: background 0.15s, border-color 0.15s;
     }
-    .play-btn:hover { background: #f0f0f0; border-color: #aaa; }
+    .play-btn:hover { background: rgba(200, 220, 240, 0.8); border-color: #5a90bb; }
     .play-btn.playing {
-      background: #e8f0fe;
-      border-color: #4a7fdb;
-      color: #1a56c4;
+      background: rgba(180, 210, 240, 0.9);
+      border-color: #3a7ab0;
+      color: #1a4a70;
     }
 
     .word-text {
       font-size: 15px;
-      color: #333;
+      color: #1a3a55;
       line-height: 1.55;
     }
-    .word-text strong { font-weight: 700; color: #111; }
+    .word-text strong { font-weight: 700; color: #0f2a40; }
 
     .word-example {
       display: flex;
       align-items: flex-start;
       gap: 6px;
       font-size: 13px;
-      color: #666;
+      color: #3a5a75;
       margin-left: 38px;
     }
     .word-example i { font-size: 13px; flex-shrink: 0; margin-top: 2px; }
     .word-example p { font-style: italic; line-height: 1.5; }
-    .word-example em { font-style: normal; color: #999; }
+    .word-example em { font-style: normal; color: #6a90aa; }
   </style>
 </head>
 <body>
 
-<div id="wordList"></div>
+<div class="card">
+  <div id="wordList"></div>
+</div>
 
 <script>
   const words = [
