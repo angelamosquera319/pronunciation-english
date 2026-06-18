@@ -22,13 +22,14 @@
 
     .word-line {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 8px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .play-btn {
       flex-shrink: 0;
+      margin-top: 2px;
       width: 30px; height: 30px;
       border-radius: 50%;
       border: 1.5px solid #ccc;
@@ -46,20 +47,12 @@
       color: #1a56c4;
     }
 
-    .word-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #111;
-    }
-
-    .word-def {
-      font-size: 14px;
-      color: #444;
+    .word-text {
+      font-size: 15px;
+      color: #333;
       line-height: 1.55;
-      margin-bottom: 8px;
-      margin-left: 38px;
     }
-    .word-def strong { font-weight: 700; color: #111; }
+    .word-text strong { font-weight: 700; color: #111; }
 
     .word-example {
       display: flex;
@@ -107,10 +100,6 @@
     const entry = document.createElement("div");
     entry.className = "word-entry";
 
-    // Icon + word line
-    const line = document.createElement("div");
-    line.className = "word-line";
-
     const btn = document.createElement("button");
     btn.className = "play-btn";
     btn.setAttribute("aria-label", "Reproducir " + w.word);
@@ -146,25 +135,20 @@
       });
     });
 
-    const title = document.createElement("span");
-    title.className = "word-title";
-    title.textContent = w.word;
-
+    const line = document.createElement("div");
+    line.className = "word-line";
     line.appendChild(btn);
-    line.appendChild(title);
 
-    // Definition
-    const def = document.createElement("p");
-    def.className = "word-def";
-    def.innerHTML = w.def;
+    const text = document.createElement("p");
+    text.className = "word-text";
+    text.innerHTML = `<strong>${w.word}:</strong> ${w.def}`;
+    line.appendChild(text);
 
-    // Example
     const ex = document.createElement("div");
     ex.className = "word-example";
     ex.innerHTML = `<i class="ti ti-music"></i><p>${w.example} <em>${w.translation}</em></p>`;
 
     entry.appendChild(line);
-    entry.appendChild(def);
     entry.appendChild(ex);
     document.getElementById("wordList").appendChild(entry);
   });
