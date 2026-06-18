@@ -6,14 +6,16 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: Arial, sans-serif;
-      min-height: 100vh;
-      background-image: url('fondo de pantalla frase lineas azul.png');
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('fondo_de_pantalla_frase_lineas_azul.png');
       background-size: cover;
       background-position: center;
-      background-attachment: fixed;
-      padding: 40px 24px;
     }
 
     .card {
@@ -22,10 +24,14 @@
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
-      max-width: 680px;
-      margin: 0 auto;
+      width: 600px;
+      max-height: 70vh;
+      overflow-y: scroll;
       padding: 8px 24px;
     }
+
+    .card::-webkit-scrollbar { display: none; }
+    .card { -ms-overflow-style: none; scrollbar-width: none; }
 
     .word-entry {
       padding: 16px 0;
@@ -106,167 +112,23 @@
       example: '"The flight takes three <strong>hours</strong>."',
       translation: '(El vuelo dura tres horas.)'
     },
-        {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
+    {
+      word: "Dawn",
+      def: 'Sustantivo: el amanecer, el momento en que comienza a aparecer la luz del día <em>(amanecer)</em>.',
+      example: '"We woke up at <strong>dawn</strong> to hike the mountain."',
+      translation: '(Nos despertamos al amanecer para escalar la montaña.)'
     },
     {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
+      word: "Second",
+      def: 'Puede funcionar como adjetivo (segundo), sustantivo (segundo de tiempo) o verbo (apoyar una moción) <em>(segundo / secundar)</em>.',
+      example: '"She finished in <strong>second</strong> place."',
+      translation: '(Ella terminó en segundo lugar.)'
     },
     {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Hours",
-      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
+      word: "Third",
+      def: 'Adjetivo ordinal que indica la posición número tres en una secuencia <em>(tercero)</em>.',
+      example: '"He lives on the <strong>third</strong> floor."',
+      translation: '(Él vive en el tercer piso.)'
     }
   ];
 
