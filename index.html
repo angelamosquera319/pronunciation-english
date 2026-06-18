@@ -15,25 +15,29 @@
     }
 
     .word-entry {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
       padding: 16px 0;
       border-bottom: 1px solid #e0e0e0;
     }
     .word-entry:last-child { border-bottom: none; }
 
+    .word-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
     .play-btn {
       flex-shrink: 0;
-      width: 38px; height: 38px;
+      width: 30px; height: 30px;
       border-radius: 50%;
       border: 1.5px solid #ccc;
       background: white;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      transition: background 0.15s, border-color 0.15s;
       color: #333;
-      font-size: 18px;
+      font-size: 13px;
+      transition: background 0.15s, border-color 0.15s;
     }
     .play-btn:hover { background: #f0f0f0; border-color: #aaa; }
     .play-btn.playing {
@@ -42,17 +46,10 @@
       color: #1a56c4;
     }
 
-    .word-body { flex: 1; }
-
     .word-title {
       font-size: 16px;
       font-weight: 700;
       color: #111;
-      margin-bottom: 4px;
-    }
-    .word-title span {
-      font-weight: 400;
-      color: #555;
     }
 
     .word-def {
@@ -60,17 +57,19 @@
       color: #444;
       line-height: 1.55;
       margin-bottom: 8px;
+      margin-left: 38px;
     }
     .word-def strong { font-weight: 700; color: #111; }
 
     .word-example {
       display: flex;
       align-items: flex-start;
-      gap: 8px;
+      gap: 6px;
       font-size: 13px;
       color: #666;
+      margin-left: 38px;
     }
-    .word-example i { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+    .word-example i { font-size: 13px; flex-shrink: 0; margin-top: 2px; }
     .word-example p { font-style: italic; line-height: 1.5; }
     .word-example em { font-style: normal; color: #999; }
   </style>
@@ -83,93 +82,92 @@
   const words = [
     {
       word: "Carrots",
-      base: "carrot",
-      def: "Como sustantivo plural de <strong>carrot</strong>, vegetal de color naranja, largo y con forma cónica, que crece bajo la tierra y se consume como alimento <em>(zanahoria)</em>.",
-      example: "She added <strong>carrots</strong> to the soup.",
-      translation: "Ella le agregó zanahorias a la sopa."
+      def: 'Como sustantivo plural de <strong>carrot</strong>, vegetal de color naranja, largo y con forma cónica, que crece bajo la tierra y se consume como alimento <em>(zanahoria)</em>.',
+      example: '"She added <strong>carrots</strong> to the soup."',
+      translation: '(Ella le agregó zanahorias a la sopa.)'
     },
     {
       word: "Minutes",
-      base: "minute",
-      def: "Plural de <strong>minute</strong>. Unidad de tiempo equivalente a 60 segundos <em>(minutos)</em>.",
-      example: "Wait five <strong>minutes</strong>, please.",
-      translation: "Espera cinco minutos, por favor."
+      def: 'Plural de <strong>minute</strong>. Unidad de tiempo equivalente a 60 segundos <em>(minutos)</em>.',
+      example: '"Wait five <strong>minutes</strong>, please."',
+      translation: '(Espera cinco minutos, por favor.)'
     },
     {
       word: "Hours",
-      base: "hour",
-      def: "Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.",
-      example: "The flight takes three <strong>hours</strong>.",
-      translation: "El vuelo dura tres horas."
+      def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
+      example: '"The flight takes three <strong>hours</strong>."',
+      translation: '(El vuelo dura tres horas.)'
     }
   ];
 
   let currentAudio = null;
   let currentBtn   = null;
 
-  function buildList() {
-    const container = document.getElementById("wordList");
+  words.forEach(w => {
+    const entry = document.createElement("div");
+    entry.className = "word-entry";
 
-    words.forEach(w => {
-      const entry = document.createElement("div");
-      entry.className = "word-entry";
+    // Icon + word line
+    const line = document.createElement("div");
+    line.className = "word-line";
 
-      const btn = document.createElement("button");
-      btn.className = "play-btn";
-      btn.setAttribute("aria-label", "Reproducir " + w.word);
-      btn.innerHTML = '<i class="ti ti-player-play"></i>';
+    const btn = document.createElement("button");
+    btn.className = "play-btn";
+    btn.setAttribute("aria-label", "Reproducir " + w.word);
+    btn.innerHTML = '<i class="ti ti-player-play"></i>';
 
-      btn.addEventListener("click", () => {
-        if (currentAudio && !currentAudio.paused) {
-          currentAudio.pause();
-          if (currentBtn) {
-            currentBtn.innerHTML = '<i class="ti ti-player-play"></i>';
-            currentBtn.classList.remove("playing");
-          }
-          if (currentBtn === btn) {
-            currentAudio = null;
-            currentBtn   = null;
-            return;
-          }
+    btn.addEventListener("click", () => {
+      if (currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        if (currentBtn) {
+          currentBtn.innerHTML = '<i class="ti ti-player-play"></i>';
+          currentBtn.classList.remove("playing");
         }
+        if (currentBtn === btn) { currentAudio = null; currentBtn = null; return; }
+      }
 
-        const audio = new Audio(`audio/${w.word.toLowerCase()}.mp3`);
-        currentAudio = audio;
-        currentBtn   = btn;
+      const audio = new Audio(`audio/${w.word.toLowerCase()}.mp3`);
+      currentAudio = audio;
+      currentBtn   = btn;
 
-        btn.innerHTML = '<i class="ti ti-player-pause"></i>';
-        btn.classList.add("playing");
+      btn.innerHTML = '<i class="ti ti-player-pause"></i>';
+      btn.classList.add("playing");
 
-        audio.play().catch(() => {
-          btn.innerHTML = '<i class="ti ti-player-play"></i>';
-          btn.classList.remove("playing");
-        });
-
-        audio.addEventListener("ended", () => {
-          btn.innerHTML = '<i class="ti ti-player-play"></i>';
-          btn.classList.remove("playing");
-          currentAudio = null;
-          currentBtn   = null;
-        });
+      audio.play().catch(() => {
+        btn.innerHTML = '<i class="ti ti-player-play"></i>';
+        btn.classList.remove("playing");
       });
 
-      const body = document.createElement("div");
-      body.className = "word-body";
-      body.innerHTML = `
-        <p class="word-def">${w.def}</p>
-        <div class="word-example">
-          <i class="ti ti-music"></i>
-          <p>${w.example} <em>(${w.translation})</em></p>
-        </div>
-      `;
-
-      entry.appendChild(btn);
-      entry.appendChild(body);
-      container.appendChild(entry);
+      audio.addEventListener("ended", () => {
+        btn.innerHTML = '<i class="ti ti-player-play"></i>';
+        btn.classList.remove("playing");
+        currentAudio = null;
+        currentBtn   = null;
+      });
     });
-  }
 
-  buildList();
+    const title = document.createElement("span");
+    title.className = "word-title";
+    title.textContent = w.word;
+
+    line.appendChild(btn);
+    line.appendChild(title);
+
+    // Definition
+    const def = document.createElement("p");
+    def.className = "word-def";
+    def.innerHTML = w.def;
+
+    // Example
+    const ex = document.createElement("div");
+    ex.className = "word-example";
+    ex.innerHTML = `<i class="ti ti-music"></i><p>${w.example} <em>${w.translation}</em></p>`;
+
+    entry.appendChild(line);
+    entry.appendChild(def);
+    entry.appendChild(ex);
+    document.getElementById("wordList").appendChild(entry);
+  });
 </script>
 </body>
 </html>
