@@ -13,7 +13,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-image: url('fondo de pantalla frase lineas azul.png');
+      background-image: url('fondo_de_pantalla_frase_lineas_azul.png');
       background-size: cover;
       background-position: center;
     }
@@ -29,7 +29,6 @@
       overflow-y: scroll;
       padding: 8px 24px;
     }
-
     .card::-webkit-scrollbar { display: none; }
     .card { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -39,16 +38,43 @@
     }
     .word-entry:last-child { border-bottom: none; }
 
+    /* Definition line */
     .word-line {
       display: flex;
       align-items: flex-start;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
+    /* Example block */
+    .word-example {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 0 4px;
+    }
+    .example-audio-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .example-sentence {
+      font-size: 15px;
+      color: #1a3a55;
+      text-align: center;
+    }
+    .example-sentence strong { font-weight: 700; color: #0f2a40; }
+    .example-translation {
+      font-size: 14px;
+      font-style: italic;
+      color: #4a6a85;
+      text-align: center;
+    }
+
+    /* Shared button style */
     .play-btn {
       flex-shrink: 0;
-      margin-top: 2px;
       width: 30px; height: 30px;
       border-radius: 50%;
       border: 1.5px solid rgba(80, 120, 170, 0.5);
@@ -73,17 +99,7 @@
     }
     .word-text strong { font-weight: 700; color: #0f2a40; }
 
-    .word-example {
-      display: flex;
-      align-items: flex-start;
-      gap: 6px;
-      font-size: 13px;
-      color: #3a5a75;
-      margin-left: 38px;
-    }
-    .word-example i { font-size: 13px; flex-shrink: 0; margin-top: 2px; }
-    .word-example p { font-style: italic; line-height: 1.5; }
-    .word-example em { font-style: normal; color: #6a90aa; }
+    .def-btn { margin-top: 2px; }
   </style>
 </head>
 <body>
@@ -97,51 +113,33 @@
     {
       word: "Carrots",
       def: 'Como sustantivo plural de <strong>carrot</strong>, vegetal de color naranja, largo y con forma cónica, que crece bajo la tierra y se consume como alimento <em>(zanahoria)</em>.',
-      example: '"She added <strong>carrots</strong> to the soup."',
-      translation: '(Ella le agregó zanahorias a la sopa.)'
+      example: 'She added <strong>carrots</strong> to the soup.',
+      translation: '(Ella le agregó zanahorias a la sopa.)',
+      exampleFile: 'carrots_example'
     },
     {
       word: "Minutes",
       def: 'Plural de <strong>minute</strong>. Unidad de tiempo equivalente a 60 segundos <em>(minutos)</em>.',
-      example: '"Wait five <strong>minutes</strong>, please."',
-      translation: '(Espera cinco minutos, por favor.)'
+      example: 'Wait five <strong>minutes</strong>, please.',
+      translation: '(Espera cinco minutos, por favor.)',
+      exampleFile: 'minutes_example'
     },
     {
       word: "Hours",
       def: 'Plural de <strong>hour</strong>. Unidad de tiempo equivalente a 60 minutos <em>(horas)</em>.',
-      example: '"The flight takes three <strong>hours</strong>."',
-      translation: '(El vuelo dura tres horas.)'
-    },
-    {
-      word: "Dawn",
-      def: 'Sustantivo: el amanecer, el momento en que comienza a aparecer la luz del día <em>(amanecer)</em>.',
-      example: '"We woke up at <strong>dawn</strong> to hike the mountain."',
-      translation: '(Nos despertamos al amanecer para escalar la montaña.)'
-    },
-    {
-      word: "Second",
-      def: 'Puede funcionar como adjetivo (segundo), sustantivo (segundo de tiempo) o verbo (apoyar una moción) <em>(segundo / secundar)</em>.',
-      example: '"She finished in <strong>second</strong> place."',
-      translation: '(Ella terminó en segundo lugar.)'
-    },
-    {
-      word: "Third",
-      def: 'Adjetivo ordinal que indica la posición número tres en una secuencia <em>(tercero)</em>.',
-      example: '"He lives on the <strong>third</strong> floor."',
-      translation: '(Él vive en el tercer piso.)'
+      example: 'The flight takes three <strong>hours</strong>.',
+      translation: '(El vuelo dura tres horas.)',
+      exampleFile: 'hours_example'
     }
   ];
 
   let currentAudio = null;
   let currentBtn   = null;
 
-  words.forEach(w => {
-    const entry = document.createElement("div");
-    entry.className = "word-entry";
-
+  function makePlayBtn(audioSrc, label) {
     const btn = document.createElement("button");
     btn.className = "play-btn";
-    btn.setAttribute("aria-label", "Reproducir " + w.word);
+    btn.setAttribute("aria-label", label);
     btn.innerHTML = '<i class="ti ti-player-play"></i>';
 
     btn.addEventListener("click", () => {
@@ -154,7 +152,7 @@
         if (currentBtn === btn) { currentAudio = null; currentBtn = null; return; }
       }
 
-      const audio = new Audio(`audio/${w.word.toLowerCase()}.mp3`);
+      const audio = new Audio(audioSrc);
       currentAudio = audio;
       currentBtn   = btn;
 
@@ -174,21 +172,49 @@
       });
     });
 
-    const line = document.createElement("div");
-    line.className = "word-line";
-    line.appendChild(btn);
+    return btn;
+  }
+
+  words.forEach(w => {
+    const entry = document.createElement("div");
+    entry.className = "word-entry";
+
+    // Definition line
+    const defBtn = makePlayBtn(`audio/${w.word.toLowerCase()}.mp3`, "Reproducir " + w.word);
+    defBtn.classList.add("def-btn");
 
     const text = document.createElement("p");
     text.className = "word-text";
     text.innerHTML = `<strong>${w.word}:</strong> ${w.def}`;
-    line.appendChild(text);
 
-    const ex = document.createElement("div");
-    ex.className = "word-example";
-    ex.innerHTML = `<i class="ti ti-music"></i><p>${w.example} <em>${w.translation}</em></p>`;
+    const wordLine = document.createElement("div");
+    wordLine.className = "word-line";
+    wordLine.appendChild(defBtn);
+    wordLine.appendChild(text);
 
-    entry.appendChild(line);
-    entry.appendChild(ex);
+    // Example block
+    const exampleBtn = makePlayBtn(`audio/${w.exampleFile}.mp3`, "Reproducir ejemplo");
+
+    const sentence = document.createElement("p");
+    sentence.className = "example-sentence";
+    sentence.innerHTML = w.example;
+
+    const audioRow = document.createElement("div");
+    audioRow.className = "example-audio-row";
+    audioRow.appendChild(exampleBtn);
+    audioRow.appendChild(sentence);
+
+    const translation = document.createElement("p");
+    translation.className = "example-translation";
+    translation.textContent = w.translation;
+
+    const exBlock = document.createElement("div");
+    exBlock.className = "word-example";
+    exBlock.appendChild(audioRow);
+    exBlock.appendChild(translation);
+
+    entry.appendChild(wordLine);
+    entry.appendChild(exBlock);
     document.getElementById("wordList").appendChild(entry);
   });
 </script>
