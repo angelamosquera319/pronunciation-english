@@ -38,7 +38,6 @@
     }
     .word-entry:last-child { border-bottom: none; }
 
-    /* Definition line */
     .word-line {
       display: flex;
       align-items: flex-start;
@@ -46,7 +45,6 @@
       margin-bottom: 12px;
     }
 
-    /* Example block */
     .word-example {
       display: flex;
       flex-direction: column;
@@ -72,7 +70,6 @@
       text-align: center;
     }
 
-    /* Shared button style */
     .play-btn {
       flex-shrink: 0;
       width: 30px; height: 30px;
@@ -99,12 +96,19 @@
     }
     .word-text strong { font-weight: 700; color: #0f2a40; }
 
+    .word-entry.last-played {
+      background: rgba(180, 210, 240, 0.15);
+      border-radius: 8px;
+      margin: 0 -8px;
+      padding: 16px 8px;
+    }
+
     .def-btn { margin-top: 2px; }
   </style>
 </head>
 <body>
 
-<div class="card">
+<div class="card" id="card">
   <div id="wordList"></div>
 </div>
 
@@ -133,10 +137,19 @@
     }
   ];
 
+  const card = document.getElementById("card");
+  const params = new URLSearchParams(window.location.search);
+  const savedWord = params.get("word") || localStorage.getItem("lastWord");
+
   let currentAudio = null;
   let currentBtn   = null;
 
-  function makePlayBtn(audioSrc, label) {
+  function saveWord(word) {
+    localStorage.setItem("lastWord", word);
+    history.replaceState(null, "", `?word=${word}`);
+  }
+
+  function makePlayBtn(audioSrc, label, wordKey) {
     const btn = document.createElement("button");
     btn.className = "play-btn";
     btn.setAttribute("aria-label", label);
@@ -159,6 +172,8 @@
       btn.innerHTML = '<i class="ti ti-player-pause"></i>';
       btn.classList.add("playing");
 
+      if (wordKey) saveWord(wordKey);
+
       audio.play().catch(() => {
         btn.innerHTML = '<i class="ti ti-player-play"></i>';
         btn.classList.remove("playing");
@@ -178,9 +193,11 @@
   words.forEach(w => {
     const entry = document.createElement("div");
     entry.className = "word-entry";
+    entry.dataset.word = w.word;
 
-    // Definition line
-    const defBtn = makePlayBtn(`audio/${w.word.toLowerCase()}.mp3`, "Reproducir " + w.word);
+    if (w.word === savedWord) entry.classList.add("last-played");
+
+    const defBtn = makePlayBtn(`audio/${w.word.toLowerCase()}.mp3`, "Reproducir " + w.word, w.word);
     defBtn.classList.add("def-btn");
 
     const text = document.createElement("p");
@@ -192,8 +209,7 @@
     wordLine.appendChild(defBtn);
     wordLine.appendChild(text);
 
-    // Example block
-    const exampleBtn = makePlayBtn(`audio/${w.exampleFile}.mp3`, "Reproducir ejemplo");
+    const exampleBtn = makePlayBtn(`audio/${w.exampleFile}.mp3`, "Reproducir ejemplo", w.word);
 
     const sentence = document.createElement("p");
     sentence.className = "example-sentence";
@@ -217,6 +233,14 @@
     entry.appendChild(exBlock);
     document.getElementById("wordList").appendChild(entry);
   });
+
+  // Scroll to last played word
+  if (savedWord) {
+    const target = document.querySelector(`.word-entry[data-word="${savedWord}"]`);
+    if (target) setTimeout(() => {
+      card.scrollTo({ top: target.offsetTop - card.offsetTop - 16, behavior: "smooth" });
+    }, 100);
+  }
 </script>
 </body>
 </html>
