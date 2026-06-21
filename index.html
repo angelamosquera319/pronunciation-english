@@ -14,11 +14,11 @@
     }
 
     body {
-      font-family: Calibri, sans-serif;
+      font-family: Arial, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-image: url('fondo de pantalla frase lineas azul.png');
+      background-image: url('fondo_de_pantalla_frase_lineas_azul.png');
       background-size: cover;
       background-position: center;
     }
@@ -45,7 +45,7 @@
 
     .word-line {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 8px;
       margin-bottom: 12px;
     }
@@ -54,6 +54,7 @@
       font-size: 18px; /* TAMAÑO LETRA PALABRA */
       color: #1a3a55;
       line-height: 1.55;
+      margin-right: 8px; /* espacio a la derecha, igual que la sangría de las demás definiciones */
     }
     .word-text strong { font-weight: 700; color: #0f2a40; }
 
@@ -67,6 +68,8 @@
       color: #1a3a55;
       line-height: 1.55;
       margin-bottom: 8px;
+      margin-left: 38px;  /* mismo espacio que deja el ícono en la primera definición */
+      margin-right: 38px; /* mismo espacio reflejado a la derecha */
     }
     .def-text strong { font-weight: 700; color: #0f2a40; }
 
@@ -119,7 +122,7 @@
       border-color: #3a7ab0;
       color: #1a4a70;
     }
-    .def-btn { margin-top: 0; }
+    .def-btn { margin-top: 2px; }
   </style>
 </head>
 <body>
@@ -130,17 +133,6 @@
 
 <script>
   const words = [
-     {
-      word: "Aa",
-      definitions: [
-        {
-          def: 'Primera letra del alfabeto.',
-          example: 'A is the first letter in apple.',
-          translation: '(A es la primera letra en manzana.)',
-          exampleFile: 'a_example'
-        }
-      ]
-    },
     {
       word: "Carrots",
       definitions: [
@@ -166,6 +158,17 @@
           example: 'He <strong>lay</strong> on the bed all afternoon.',
           translation: '(Él estuvo acostado en la cama toda la tarde.)',
           exampleFile: 'lay_example2'
+        }
+      ]
+    },
+    {
+      word: "Minutes",
+      definitions: [
+        {
+          def: 'Plural de <strong>minute</strong>. Unidad de tiempo equivalente a 60 segundos <em>(minutos)</em>.',
+          example: 'Wait five <strong>minutes</strong>, please.',
+          translation: '(Espera cinco minutos, por favor.)',
+          exampleFile: 'minutes_example'
         }
       ]
     }
@@ -223,13 +226,13 @@
     entry.className = "word-entry";
     entry.dataset.word = w.word;
 
-    // Word title + audio button
+    // Word title + audio button (la primera definición va junto a la palabra, separada por ":")
     const defBtn = makePlayBtn(`audio/${w.word.toLowerCase()}.mp3`, "Reproducir " + w.word, w.word);
     defBtn.classList.add("def-btn");
 
     const wordTitle = document.createElement("p");
     wordTitle.className = "word-text";
-    wordTitle.innerHTML = `<strong>${w.word}</strong>`;
+    wordTitle.innerHTML = `<strong>${w.word}:</strong> ${w.definitions[0].def}`;
 
     const wordLine = document.createElement("div");
     wordLine.className = "word-line";
@@ -248,10 +251,13 @@
       const defBlock = document.createElement("div");
       defBlock.className = "def-block";
 
-      const defText = document.createElement("p");
-      defText.className = "def-text";
-      defText.innerHTML = d.def;
-      defBlock.appendChild(defText);
+      // La definición ya se mostró arriba junto a la palabra si es la primera (i === 0)
+      if (i > 0) {
+        const defText = document.createElement("p");
+        defText.className = "def-text";
+        defText.innerHTML = d.def;
+        defBlock.appendChild(defText);
+      }
 
       // Example
       const exampleBtn = makePlayBtn(`audio/${d.exampleFile}.mp3`, "Reproducir ejemplo", w.word);
