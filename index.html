@@ -71,20 +71,21 @@
 
     .word-example {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
+      align-items: flex-start;
+      gap: 8px;
       padding: 6px 0 2px;
     }
-    .example-audio-row {
+    .example-text-block {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 8px;
+      flex: 1;
     }
     .example-sentence {
       font-size: 17px; /* TAMAÑO LETRA EJEMPLO */
       color: #111;
       text-align: center;
+      width: 100%;
     }
     .example-sentence strong { font-weight: 700; color: #111; }
     .example-translation {
@@ -92,7 +93,7 @@
       font-style: italic;
       color: #666;
       text-align: center;
-      padding-left: 38px;
+      width: 100%;
     }
 
     .def-divider {
@@ -263,19 +264,19 @@
       sentence.className = "example-sentence";
       sentence.innerHTML = d.example;
 
-      const audioRow = document.createElement("div");
-      audioRow.className = "example-audio-row";
-      audioRow.appendChild(exampleBtn);
-      audioRow.appendChild(sentence);
-
       const translation = document.createElement("p");
       translation.className = "example-translation";
       translation.textContent = d.translation;
 
+      const textBlock = document.createElement("div");
+      textBlock.className = "example-text-block";
+      textBlock.appendChild(sentence);
+      textBlock.appendChild(translation);
+
       const exBlock = document.createElement("div");
       exBlock.className = "word-example";
-      exBlock.appendChild(audioRow);
-      exBlock.appendChild(translation);
+      exBlock.appendChild(exampleBtn);
+      exBlock.appendChild(textBlock);
 
       defBlock.appendChild(exBlock);
       entry.appendChild(defBlock);
