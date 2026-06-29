@@ -54,7 +54,7 @@
       font-size: 18px; /* TAMAÑO LETRA PALABRA */
       color: #1a3a55;
       line-height: 1.55;
-      margin-right: 8px; /* espacio a la derecha, igual que la sangría de las demás definiciones */
+      margin-right: 8px;
     }
     .word-text strong { font-weight: 700; color: #0f2a40; }
 
@@ -68,8 +68,8 @@
       color: #1a3a55;
       line-height: 1.55;
       margin-bottom: 8px;
-      margin-left: 38px;  /* mismo espacio que deja el ícono en la primera definición */
-      margin-right: 38px; /* mismo espacio reflejado a la derecha */
+      margin-left: 38px;
+      margin-right: 38px;
     }
     .def-text strong { font-weight: 700; color: #0f2a40; }
 
@@ -117,7 +117,7 @@
       border-color: #3a7ab0;
       color: #1a4a70;
     }
-    .def-btn { margin-top: 1px; } /* ajuste fino para alinear el ícono con la línea de la palabra */
+    .def-btn { margin-top: 1px; }
   </style>
 </head>
 <body>
@@ -128,7 +128,7 @@
 
 <script>
   const words = [
-  {
+    {
       word: "A",
       definitions: [
         {
@@ -138,7 +138,6 @@
         }
       ]
     },
-
     {
       word: "Carrots",
       definitions: [
@@ -218,7 +217,7 @@
     entry.className = "word-entry";
     entry.dataset.word = w.word;
 
-    // Word title + audio button (la primera definición va junto a la palabra, separada por ":")
+    // Word title + audio button (primera definición junto a la palabra, separada por ":")
     const defBtn = makePlayBtn(`audio/${w.word.toLowerCase()}.mp3`, "Reproducir " + w.word, w.word);
     defBtn.classList.add("def-btn");
 
@@ -232,26 +231,37 @@
     wordLine.appendChild(wordTitle);
     entry.appendChild(wordLine);
 
-    // Definitions
+    // Ejemplo de la primera definición
+    const firstExample = document.createElement("p");
+    firstExample.className = "example-sentence";
+    firstExample.innerHTML = w.definitions[0].example;
+
+    const firstTranslation = document.createElement("p");
+    firstTranslation.className = "example-translation";
+    firstTranslation.textContent = w.definitions[0].translation;
+
+    const firstExBlock = document.createElement("div");
+    firstExBlock.className = "word-example";
+    firstExBlock.appendChild(firstExample);
+    firstExBlock.appendChild(firstTranslation);
+    entry.appendChild(firstExBlock);
+
+    // Definiciones adicionales (2da en adelante)
     w.definitions.forEach((d, i) => {
-      if (i > 0) {
-        const divider = document.createElement("hr");
-        divider.className = "def-divider";
-        entry.appendChild(divider);
-      }
+      if (i === 0) return; // la primera ya se mostró arriba
+
+      const divider = document.createElement("hr");
+      divider.className = "def-divider";
+      entry.appendChild(divider);
 
       const defBlock = document.createElement("div");
       defBlock.className = "def-block";
 
-      // La definición ya se mostró arriba junto a la palabra si es la primera (i === 0)
-      if (i > 0) {
-        const defText = document.createElement("p");
-        defText.className = "def-text";
-        defText.innerHTML = d.def;
-        defBlock.appendChild(defText);
-      }
+      const defText = document.createElement("p");
+      defText.className = "def-text";
+      defText.innerHTML = d.def;
+      defBlock.appendChild(defText);
 
-      // Example
       const sentence = document.createElement("p");
       sentence.className = "example-sentence";
       sentence.innerHTML = d.example;
@@ -262,7 +272,7 @@
 
       const exBlock = document.createElement("div");
       exBlock.className = "word-example";
-      exBlock.appendChild(audioRow);
+      exBlock.appendChild(sentence);
       exBlock.appendChild(translation);
 
       defBlock.appendChild(exBlock);
