@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pronunciation</title>
+  <title>Vocabulario</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,13 +18,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #f5f5f5; /* FONDO DE LA PÁGINA */
+      background-image: url('fondo de pantalla frase lineas azul.png');
+      background-size: cover;
+      background-position: center;
     }
 
     .card {
-      background: white;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
-      border: 1px solid #e0e0e0;
+      border: 1px solid rgba(255, 255, 255, 0.6);
       width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
       max-height: 80vh;
       overflow-y: scroll;
@@ -35,7 +39,7 @@
 
     .word-entry {
       padding: 16px 0;
-      border-bottom: 2px solid #ccc;
+      border-bottom: 2px solid rgba(100, 140, 180, 0.5);
     }
     .word-entry:last-child { border-bottom: none; }
 
@@ -48,11 +52,11 @@
 
     .word-text {
       font-size: 18px; /* TAMAÑO LETRA PALABRA */
-      color: #111;
+      color: #1a3a55;
       line-height: 1.55;
-      margin-right: 8px;
+      margin-right: 8px; /* espacio a la derecha, igual que la sangría de las demás definiciones */
     }
-    .word-text strong { font-weight: 700; color: #111; }
+    .word-text strong { font-weight: 700; color: #0f2a40; }
 
     .def-block {
       margin-bottom: 12px;
@@ -61,13 +65,13 @@
 
     .def-text {
       font-size: 17px; /* TAMAÑO LETRA DEFINICIÓN */
-      color: #333;
+      color: #1a3a55;
       line-height: 1.55;
       margin-bottom: 8px;
-      margin-left: 38px;
-      margin-right: 38px;
+      margin-left: 38px;  /* mismo espacio que deja el ícono en la primera definición */
+      margin-right: 38px; /* mismo espacio reflejado a la derecha */
     }
-    .def-text strong { font-weight: 700; color: #111; }
+    .def-text strong { font-weight: 700; color: #0f2a40; }
 
     .word-example {
       display: flex;
@@ -76,22 +80,27 @@
       gap: 4px;
       padding: 6px 0 2px;
     }
+    .example-audio-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     .example-sentence {
       font-size: 17px; /* TAMAÑO LETRA EJEMPLO */
-      color: #111;
+      color: #1a3a55;
       text-align: center;
     }
-    .example-sentence strong { font-weight: 700; color: #111; }
+    .example-sentence strong { font-weight: 700; color: #0f2a40; }
     .example-translation {
       font-size: 16px; /* TAMAÑO LETRA TRADUCCIÓN */
       font-style: italic;
-      color: #666;
+      color: #4a6a85;
       text-align: center;
     }
 
     .def-divider {
       border: none;
-      border-top: 1px dashed #ccc;
+      border-top: 1px dashed rgba(100, 140, 180, 0.3);
       margin: 12px 0;
     }
 
@@ -99,19 +108,19 @@
       flex-shrink: 0;
       width: 30px; height: 30px;
       border-radius: 50%;
-      border: 1.5px solid #ccc;
-      background: white;
+      border: 1.5px solid rgba(80, 120, 170, 0.5);
+      background: rgba(255, 255, 255, 0.7);
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      color: #333;
+      color: #3a6080;
       font-size: 13px;
       transition: background 0.15s, border-color 0.15s;
     }
-    .play-btn:hover { background: #f0f0f0; border-color: #aaa; }
+    .play-btn:hover { background: rgba(200, 220, 240, 0.8); border-color: #5a90bb; }
     .play-btn.playing {
-      background: #e8f0fe;
-      border-color: #4a7fdb;
-      color: #1a56c4;
+      background: rgba(180, 210, 240, 0.9);
+      border-color: #3a7ab0;
+      color: #1a4a70;
     }
     .def-btn { margin-top: 1px; } /* ajuste fino para alinear el ícono con la línea de la palabra */
   </style>
@@ -124,6 +133,18 @@
 
 <script>
   const words = [
+  {
+      word: "A",
+      definitions: [
+        {
+          def: 'Como sustantivo, se refiere a la primera letra del alfabeto.',
+          example: 'The word "apple" starts with an A.',
+          translation: 'La palabra "apple" comienza con una A.',
+          exampleFile: 'a_example'
+        }
+      ]
+    },
+
     {
       word: "Carrots",
       definitions: [
@@ -149,17 +170,6 @@
           example: 'He <strong>lay</strong> on the bed all afternoon.',
           translation: '(Él estuvo acostado en la cama toda la tarde.)',
           exampleFile: 'lay_example2'
-        }
-      ]
-    },
-    {
-      word: "Minutes",
-      definitions: [
-        {
-          def: 'Plural de <strong>minute</strong>. Unidad de tiempo equivalente a 60 segundos <em>(minutos)</em>.',
-          example: 'Wait five <strong>minutes</strong>, please.',
-          translation: '(Espera cinco minutos, por favor.)',
-          exampleFile: 'minutes_example'
         }
       ]
     }
@@ -251,9 +261,16 @@
       }
 
       // Example
+      const exampleBtn = makePlayBtn(`audio/${d.exampleFile}.mp3`, "Reproducir ejemplo", w.word);
+
       const sentence = document.createElement("p");
       sentence.className = "example-sentence";
       sentence.innerHTML = d.example;
+
+      const audioRow = document.createElement("div");
+      audioRow.className = "example-audio-row";
+      audioRow.appendChild(exampleBtn);
+      audioRow.appendChild(sentence);
 
       const translation = document.createElement("p");
       translation.className = "example-translation";
@@ -261,7 +278,7 @@
 
       const exBlock = document.createElement("div");
       exBlock.className = "word-example";
-      exBlock.appendChild(sentence);
+      exBlock.appendChild(audioRow);
       exBlock.appendChild(translation);
 
       defBlock.appendChild(exBlock);
