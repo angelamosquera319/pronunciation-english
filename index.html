@@ -71,21 +71,15 @@
 
     .word-example {
       display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      padding: 6px 0 2px;
-    }
-    .example-text-block {
-      display: flex;
       flex-direction: column;
       align-items: center;
-      flex: 1;
+      gap: 4px;
+      padding: 6px 0 2px;
     }
     .example-sentence {
       font-size: 17px; /* TAMAÑO LETRA EJEMPLO */
       color: #111;
       text-align: center;
-      width: 100%;
     }
     .example-sentence strong { font-weight: 700; color: #111; }
     .example-translation {
@@ -93,7 +87,6 @@
       font-style: italic;
       color: #666;
       text-align: center;
-      width: 100%;
     }
 
     .def-divider {
@@ -258,8 +251,6 @@
       }
 
       // Example
-      const exampleBtn = makePlayBtn(`audio/${d.exampleFile}.mp3`, "Reproducir ejemplo", w.word);
-
       const sentence = document.createElement("p");
       sentence.className = "example-sentence";
       sentence.innerHTML = d.example;
@@ -268,15 +259,10 @@
       translation.className = "example-translation";
       translation.textContent = d.translation;
 
-      const textBlock = document.createElement("div");
-      textBlock.className = "example-text-block";
-      textBlock.appendChild(sentence);
-      textBlock.appendChild(translation);
-
       const exBlock = document.createElement("div");
       exBlock.className = "word-example";
-      exBlock.appendChild(exampleBtn);
-      exBlock.appendChild(textBlock);
+      exBlock.appendChild(sentence);
+      exBlock.appendChild(translation);
 
       defBlock.appendChild(exBlock);
       entry.appendChild(defBlock);
