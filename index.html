@@ -471,7 +471,7 @@
     entry.dataset.word = w.word;
 
     // Word title + audio button (primera definición junto a la palabra, separada por ":")
-    const defBtn = makePlayBtn(`audio/${w.word.toLowerCase()}.mp3`, "Reproducir " + w.word, w.word);
+    const defBtn = makePlayBtn(`audio/${w.word}.mp3`, "Reproducir " + w.word, w.word);
     defBtn.classList.add("def-btn");
 
     const wordTitle = document.createElement("p");
