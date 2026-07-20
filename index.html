@@ -91,6 +91,12 @@
       color: #4a6a85;
       text-align: center;
     }
+    .example-image {
+      width: 100%;
+      max-width: 300px; /* ANCHO MÁXIMO DE LA IMAGEN */
+      border-radius: 8px;
+      margin-top: 8px;
+    }
 
     .def-divider {
       border: none;
@@ -436,6 +442,31 @@
     return btn;
   }
 
+  function buildExampleBlock(d) {
+    const exBlock = document.createElement("div");
+    exBlock.className = "word-example";
+
+    const sentence = document.createElement("p");
+    sentence.className = "example-sentence";
+    sentence.innerHTML = d.example;
+    exBlock.appendChild(sentence);
+
+    const translation = document.createElement("p");
+    translation.className = "example-translation";
+    translation.textContent = d.translation;
+    exBlock.appendChild(translation);
+
+    // Imagen opcional
+    if (d.image) {
+      const img = document.createElement("img");
+      img.src = d.image;
+      img.className = "example-image";
+      exBlock.appendChild(img);
+    }
+
+    return exBlock;
+  }
+
   words.forEach(w => {
     const entry = document.createElement("div");
     entry.className = "word-entry";
@@ -456,23 +487,11 @@
     entry.appendChild(wordLine);
 
     // Ejemplo de la primera definición
-    const firstExample = document.createElement("p");
-    firstExample.className = "example-sentence";
-    firstExample.innerHTML = w.definitions[0].example;
-
-    const firstTranslation = document.createElement("p");
-    firstTranslation.className = "example-translation";
-    firstTranslation.textContent = w.definitions[0].translation;
-
-    const firstExBlock = document.createElement("div");
-    firstExBlock.className = "word-example";
-    firstExBlock.appendChild(firstExample);
-    firstExBlock.appendChild(firstTranslation);
-    entry.appendChild(firstExBlock);
+    entry.appendChild(buildExampleBlock(w.definitions[0]));
 
     // Definiciones adicionales (2da en adelante)
     w.definitions.forEach((d, i) => {
-      if (i === 0) return; // la primera ya se mostró arriba
+      if (i === 0) return;
 
       const divider = document.createElement("hr");
       divider.className = "def-divider";
@@ -486,20 +505,7 @@
       defText.innerHTML = d.def;
       defBlock.appendChild(defText);
 
-      const sentence = document.createElement("p");
-      sentence.className = "example-sentence";
-      sentence.innerHTML = d.example;
-
-      const translation = document.createElement("p");
-      translation.className = "example-translation";
-      translation.textContent = d.translation;
-
-      const exBlock = document.createElement("div");
-      exBlock.className = "word-example";
-      exBlock.appendChild(sentence);
-      exBlock.appendChild(translation);
-
-      defBlock.appendChild(exBlock);
+      defBlock.appendChild(buildExampleBlock(d));
       entry.appendChild(defBlock);
     });
 
