@@ -18,27 +18,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #FFF9FE;    /* mismo color del fondo de las flores */
-
-      /* FONDO DE FLORES: 4 piezas, una en cada esquina. Se ven completas en cualquier pantalla, sin recortes.
-         Cada tamaño es "auto" de ancho y un alto proporcional; min() evita que se encimen en pantallas muy angostas. */
-      background-image:
-        url('flores-sup-izq.webp'),
-        url('flores-sup-der.webp'),
-        url('flores-inf-izq.webp'),
-        url('flores-inf-der.webp');
-      background-position: left top, right top, left bottom, right bottom;
-      background-size:
-        auto min(40.92%, 58.06vw),
-        auto min(45.83%, 65.02vw),
-        auto min(59.08%, 83.81vw),
-        auto min(54.17%, 76.85vw);
-      background-repeat: no-repeat;
+      background-image: url('fondo de pantalla frase lineas azul.svg');
+      background-size: cover;
+      background-position: center;
     }
 
     .card {
-      position: relative;
-      z-index: 1;
       background: rgba(255, 255, 255, 0.72);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -142,7 +127,6 @@
 </head>
 <body>
 
-
 <div class="card" id="card">
   <div id="wordList"></div>
 </div>
@@ -155,7 +139,8 @@
         {
           def: 'Como sustantivo, se refiere a la primera letra del alfabeto.',
           example: 'The word "apple" starts with an A.',
-          translation: 'La palabra "apple" comienza con una A.'
+          translation: 'La palabra "apple" comienza con una A.',
+          image: 'images/carrot.png'
         }
       ]
   },
