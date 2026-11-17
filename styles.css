@@ -70,7 +70,9 @@ body {
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
       width: min(750px, 160vw); /* ANCHO DE LA TARJETA */
-      height: min(750px, 100vh);
+      height: min(70px, 90vh); /* ANCHO DE LA TARJETA */
+      /*max-height: 150vh;
+      max-height: 150vh;*/
       overflow-y: scroll;
       padding: 8px 8px;
       overflow-wrap: anywhere;
