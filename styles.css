@@ -11,19 +11,78 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #5B7C99; /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
+      background-color: #f1e4f1; /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
     }
 
-@media only screen and (width <= 567px) {
-     body {
-      font-family: Roboto, "Helvetica Neue", sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #5B7C99;
-    }
+@media only screen and (width>=1440px) {
+   
 }
 
+/*medium-desktop*/
+@media only screen and (width<=1439px) {
+    
+}
+
+/*small-desktop*/
+@media only screen and (width<=1279px) {
+    
+}
+
+/*tablet*/
+@media only screen and (width<=1023px) {
+    
+}
+
+/*big-phone*/
+@media only screen and (width<=767px) {
+
+}
+
+/*small-phone*/
+@media only screen and (width<=567px) {
+      /* 1. Ruta de la imagen */
+  background-image: url("celular.png");
+  /* 2. Ajusta la imagen para que cubra toda la pantalla */
+  background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
+  background-position: center center;
+  /* 4. Evita que la imagen se repita como mosaico */
+  background-repeat: no-repeat;
+  /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
+  background-attachment: fixed;
+  /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
+  min-height: 100vh;
+
+.vocabulario {
+  color: #5B7C99;
+  font-size:30px;
+  line-height:36px
+  font-weight: bold;
+  font-weight: 500;
+  margin: 10px 15px 20px 25px;
+}
+
+.descripcion {
+  color: #000000;
+  font-size:24px;
+}
+
+   .card {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
+      max-height: 900vh;
+      overflow-y: scroll;
+      padding: 8px 8px;
+      overflow-wrap: anywhere;
+    }
+    .card::-webkit-scrollbar { display: none; }
+    .card { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/*
     .card {
       background: rgba(255, 255, 255, 0.72);
       backdrop-filter: blur(12px);
@@ -39,3 +98,4 @@
     .card::-webkit-scrollbar { display: none; }
     .card { -ms-overflow-style: none; scrollbar-width: none; }
 
+*/
