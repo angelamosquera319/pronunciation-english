@@ -5,7 +5,7 @@ body {
 }
 
 .vocabulario {
-  color: #4d648d;
+  color: #7f152e;
   font-size:30px;
   line-height:36px
   font-weight: bold;
@@ -15,7 +15,7 @@ body {
 .descripcion {
   color: #000000;
   font-size:28px;
-  line-height:36px
+  /*line-height:36px*/
   font-weight: bold;
   font-weight: 500;
 }
