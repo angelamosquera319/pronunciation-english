@@ -35,17 +35,15 @@ html, body {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.50);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  width: min(750px, 100%);    /* ancho fijo, sin pasarse en pantallas chicas */
-  height: min(600px, 100%);   /* alto fijo, sin pasarse en pantallas bajas */
-  padding: 16px 24px;
-  overflow-x: hidden;         /* nada se sale a los lados */
-  overflow-y: auto;           /* si hay mucho texto, scroll por dentro */
-  overflow-wrap: anywhere;    /* parte las palabras muy largas */
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
+      max-height: 80vh;
+      overflow-y: scroll;
+      padding: 8px 24px;
 }
 
 .card::-webkit-scrollbar { display: none; }
