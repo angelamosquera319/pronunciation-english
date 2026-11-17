@@ -5,7 +5,7 @@ body {
   /* 1. Ruta de la imagen */
   background-image: url("amarillo.png");
   /* 2. Ajusta la imagen para que cubra toda la pantalla */
-  background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
+  background-size: cover; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
   background-position: center;
   /* 4. Evita que la imagen se repita como mosaico */
   background-repeat: no-repeat;
@@ -13,6 +13,19 @@ body {
   background-attachment: fixed;
   /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
   min-height: 100vh;
+}
+
+/* Imagen vertical por defecto (para celulares) */
+body {
+  background-image: url("fondo-movil.jpg");
+  /* ...resto de propiedades... */
+}
+
+/* Imagen horizontal para tablets y computadores */
+@media (min-width: 768px) {
+  body {
+    background-color: #d0e1f9;
+  }
 }
 
 .vocabulario {
