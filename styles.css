@@ -15,7 +15,13 @@
     }
 
 @media only screen and (width <= 567px) {
-  background-color: #5B7C99;
+     body {
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #5B7C99;
+    }
 }
 
     .card {
