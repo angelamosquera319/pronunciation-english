@@ -19,7 +19,7 @@ body {
 /* Activa el fondo fijo solo en pantallas grandes (tablets horizontales y PC) */
 @media (min-width: 768px) {
   body {
-    background-image: url("fondo.png");
+    background-image: url("rojo.png");
     background-attachment: fixed;
   }
   
