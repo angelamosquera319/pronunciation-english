@@ -11,32 +11,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #f1e4f1; /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
+      /*background-color: #f1e4f1;*/ /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
     }
-
-@media only screen and (width>=1440px) {
-   
-}
-
-/*medium-desktop*/
-@media only screen and (width<=1439px) {
-    
-}
-
-/*small-desktop*/
-@media only screen and (width<=1279px) {
-    
-}
-
-/*tablet*/
-@media only screen and (width<=1023px) {
-    
-}
-
-/*big-phone*/
-@media only screen and (width<=767px) {
-
-}
 
 /*small-phone*/
 @media only screen and (width<=567px) {
@@ -67,20 +43,45 @@
 }
 
    .card {
-      background: rgba(255, 255, 255, 0.72);
+      background: rgba(255, 255, 255, 0.70);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
       width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
-      max-height: 900vh;
+      max-height: 90vh;
       overflow-y: scroll;
-      padding: 8px 8px;
+      padding: 10px 10px;
       overflow-wrap: anywhere;
     }
     .card::-webkit-scrollbar { display: none; }
     .card { -ms-overflow-style: none; scrollbar-width: none; }
 }
+
+@media only screen and (width>=1440px) {
+   
+}
+
+/*medium-desktop*/
+@media only screen and (width<=1439px) {
+    
+}
+
+/*small-desktop*/
+@media only screen and (width<=1279px) {
+    
+}
+
+/*tablet*/
+@media only screen and (width<=1023px) {
+    
+}
+
+/*big-phone*/
+@media only screen and (width<=767px) {
+
+}
+
 
 /*
     .card {
