@@ -19,7 +19,7 @@ body {
 /* Activa el fondo fijo solo en pantallas grandes (tablets horizontales y PC) */
 @media (min-width: 768px) {
   body {
-    background-image: url("flores.png");
+    background-image: url("montaña.png");
     background-attachment: fixed;
   }
   
