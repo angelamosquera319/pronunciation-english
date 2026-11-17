@@ -3,7 +3,7 @@ html, body {
   height: 100%;
   overflow: hidden;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  padding: 240px 24px; 
+  padding: 24px 24px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,8 +66,8 @@ body {
       -webkit-backdrop-filter: blur(10px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
-      /*width: min(750px, 100vw);
-      max-height: 80vh;*/
+      width: min(1025px, 90vw);
+      max-height: 80vh;
       overflow-y: scroll;
       padding: 8px 8px;
       overflow-wrap: anywhere;
