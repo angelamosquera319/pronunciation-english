@@ -20,4 +20,5 @@ body {
   grid-template-columns: minmax(0, 1fr);   /* una sola columna */
   gap: 12px;
   width: 100%;
+  background-color: #F54927;
 }
