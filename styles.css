@@ -13,7 +13,7 @@ body {
   background-attachment: fixed;
   /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
   min-height: 100vh;
-  margin: 0;
+  margin: 110;
 }
 
 /* Activa el fondo fijo solo en pantallas grandes (tablets horizontales y PC) */
