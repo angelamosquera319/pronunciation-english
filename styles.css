@@ -1,11 +1,11 @@
 body {
-  background-color: #8a9bae;
+  background-color: #d0e1f9;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha */
 }
 
 .vocabulario {
-  color: #4D648D;
+  color: #4d648d;
   font-size:30px;
   line-height:36px
   font-weight: bold;
@@ -13,7 +13,7 @@ body {
 }
 
 .descripcion {
-  color: #2A3132;
+  color: #2a3132;
   font-size:28px;
   line-height:36px
   font-weight: bold;
