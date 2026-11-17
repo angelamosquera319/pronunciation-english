@@ -5,7 +5,7 @@ body {
   /* 1. Ruta de la imagen */
   background-image: url("amarillo.png");
   /* 2. Ajusta la imagen para que cubra toda la pantalla */
-  background-size: cover; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
+  background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
   background-position: center;
   /* 4. Evita que la imagen se repita como mosaico */
   background-repeat: no-repeat;
@@ -19,6 +19,17 @@ body {
 @media (min-width: 768px) {
   body {
     background-color: #d0e1f9;
+      /* 1. Ruta de la imagen */
+ /* background-image: url("amarillo.png");*/
+  /* 2. Ajusta la imagen para que cubra toda la pantalla */
+  background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
+  background-position: center;
+  /* 4. Evita que la imagen se repita como mosaico */
+  background-repeat: no-repeat;
+  /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
+  background-attachment: fixed;
+  /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
+  min-height: 100vh;
   }
 }
 
@@ -36,13 +47,13 @@ body {
 }
 
 .card {
-      background: rgba(255, 255, 255, 0.72);
+      background: rgba(255, 255, 255, 0.70);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
       width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
-      max-height: 80vh;
+      max-height: 90vh;
       overflow-y: scroll;
       padding: 8px 24px;
 }
