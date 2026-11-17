@@ -6,7 +6,7 @@ body {
   background-image: url("rojo.png");
   /* 2. Ajusta la imagen para que cubra toda la pantalla */
   background-size: cover; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
-  /*background-position: center;*/
+  background-position: center;
   /* 4. Evita que la imagen se repita como mosaico */
   background-repeat: no-repeat;
   /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
