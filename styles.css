@@ -2,6 +2,11 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /*
 body {
@@ -29,14 +34,6 @@ body {
 
 @media (min-width: 1025px) and (max-width: 1200px) {
   body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha */
-  display: flex;
-  align-items: center;
-  justify-content: center;
   /* 1. Ruta de la imagen */
   background-image: url("computador.png");
   /* 2. Ajusta la imagen para que cubra toda la pantalla */
@@ -69,7 +66,7 @@ body {
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
-      width: min(790px, 160vw); /* ANCHO DE LA TARJETA */
+      width: min(700px, 170vw); /* ANCHO DE LA TARJETA */
       height: min(70px, 90vh); /* ANCHO DE LA TARJETA */
       /*max-height: 150vh;
       max-height: 150vh;*/
