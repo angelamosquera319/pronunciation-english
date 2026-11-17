@@ -5,14 +5,14 @@ body {
   /* 1. Ruta de la imagen */
   background-image: url("wildlife-landscape.svg");
   /* 2. Ajusta la imagen para que cubra toda la pantalla */
-  background-size: contain; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
-  background-position: center;
+  background-size: cover; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
+  /*background-position: center;*/
   /* 4. Evita que la imagen se repita como mosaico */
   background-repeat: no-repeat;
   /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
   background-attachment: fixed;
   /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
-  min-height: 100vh;
+  /*min-height: 100vh;*/
   margin: 0;
 }
 
