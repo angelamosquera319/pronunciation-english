@@ -4,25 +4,18 @@ body {
   padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha */
 }
 
-.texto-rojo {
+.vocabulario {
   color: #763626;
-  font-size:28px;
+  font-size:30px;
   line-height:36px
   font-weight: bold;
   font-weight: 500;
 }
 
-.terms-container {
-  display: flex;
-  flex-direction: column;
-  width: min(1088px, 100%);
-  margin: 0 auto;
-}
-
-.public-list__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);   /* una sola columna */
-  gap: 12px;
-  width: 100%;
-  background-color: #F54927;
+.descripcion {
+  color: #2A3132;
+  font-size:28px;
+  line-height:36px
+  font-weight: bold;
+  font-weight: 500;
 }
