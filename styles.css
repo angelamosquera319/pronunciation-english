@@ -4,7 +4,7 @@ html, body {
   overflow: hidden;
   background-color: #d0e1f9;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha *
+  padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,11 +28,11 @@ html, body {
   overflow: hidden;
   background-color: #d0e1f9;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha *
+  padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha */
   display: flex;
   align-items: center;
   justify-content: center;
-    background-image: url("rojo.png");
+  background-image: url("rojo.png");
  /* 2. Ajusta la imagen para que cubra toda la pantalla */
   background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
   background-position: center center;
