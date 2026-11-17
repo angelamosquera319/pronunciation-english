@@ -43,7 +43,8 @@ html, body {
       width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
       max-height: 90vh;
       overflow-y: scroll;
-      padding: 8px 24px;
+      padding: 8px 249px;
+      overflow-wrap: anywhere;
 }
 
 .card::-webkit-scrollbar { display: none; }
