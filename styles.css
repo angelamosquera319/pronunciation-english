@@ -24,6 +24,7 @@
       max-height: 20vh;
       overflow-y: scroll;
       padding: 8px 24px;
+      overflow-wrap: anywhere;
     }
     .card::-webkit-scrollbar { display: none; }
     .card { -ms-overflow-style: none; scrollbar-width: none; }
