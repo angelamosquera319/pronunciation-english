@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Vocabulario</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -27,7 +28,7 @@
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
-      width: min(750px, 900vw); /* ANCHO DE LA TARJETA */
+      width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
       max-height: 80vh;
       overflow-y: scroll;
       padding: 8px 24px;
@@ -53,7 +54,14 @@
       line-height: 1.55;
       margin-right: 8px;
     }
-    .word-text strong { font-weight: 700; color: #0f2a40; }
+    /* ESTILO DE LA PALABRA: igual al "headword" de la tarjeta de Oxford */
+    .word-text strong {
+      font-family: 'Source Sans Pro', Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: #1A3561;
+    }
 
     .def-block {
       margin-bottom: 12px;
