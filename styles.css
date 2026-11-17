@@ -1,9 +1,29 @@
 body {
   background-color: #d0e1f9;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha */
+  padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha *
+  /* 1. Ruta de la imagen */
+  background-image: url("wildlife-landscape.svg");
+  /* 2. Ajusta la imagen para que cubra toda la pantalla */
+  background-size: cover;
+  /* 3. Centra la imagen */
+  background-position: center;
+  /* 4. Evita que la imagen se repita como mosaico */
+  background-repeat: no-repeat;
+  /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
+  background-attachment: fixed;
+  /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
+  min-height: 100vh;
+  margin: 0;
 }
 
+/* Activa el fondo fijo solo en pantallas grandes (tablets horizontales y PC) */
+@media (min-width: 768px) {
+  body {
+    background-image: url("wildlife-landscape.svg");
+    background-attachment: fixed;
+  }
+  
 .vocabulario {
   color: #7f152e;
   font-size:30px;
