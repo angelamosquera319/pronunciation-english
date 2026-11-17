@@ -1,6 +1,7 @@
 body {
   background-color: #a2d0f5;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 24px 40px;   /* 24px arriba y abajo, 40px a izquierda y derecha */
 }
 
 .texto-rojo {
