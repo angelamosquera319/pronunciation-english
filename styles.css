@@ -21,6 +21,11 @@ body {
   body {
     background-image: url("rojo.png");
     background-attachment: fixed;
+      background-size: cover; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
+  background-position: center;
+  /* 4. Evita que la imagen se repita como mosaico */
+  background-repeat: no-repeat;
+
   }
   
 .vocabulario {
