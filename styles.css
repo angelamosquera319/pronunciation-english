@@ -5,6 +5,9 @@ html, body {
   background-color: #d0e1f9;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha *
+  display: flex;
+  align-items: center;
+  justify-content: center;
   /* 1. Ruta de la imagen */
   background-image: url("amarillo.png");
   /* 2. Ajusta la imagen para que cubra toda la pantalla */
