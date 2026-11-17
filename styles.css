@@ -14,9 +14,35 @@
       /*background-color: #f1e4f1;*/ /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
     }
 
+
+@media only screen and (width>=1440px) {
+   
+}
+
+/*medium-desktop*/
+@media only screen and (width<=1439px) {
+    
+}
+
+/*small-desktop*/
+@media only screen and (width<=1279px) {
+    
+}
+
+/*tablet*/
+@media only screen and (width<=1023px) {
+    
+}
+
+/*big-phone*/
+@media only screen and (width<=767px) {
+
+}
+
 /*small-phone*/
 @media only screen and (width<=567px) {
-      /* 1. Ruta de la imagen */
+    body {
+        /* 1. Ruta de la imagen */
   background-image: url("celular.png");
   /* 2. Ajusta la imagen para que cubra toda la pantalla */
   background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
@@ -56,32 +82,8 @@
     }
     .card::-webkit-scrollbar { display: none; }
     .card { -ms-overflow-style: none; scrollbar-width: none; }
+    }   
 }
-
-@media only screen and (width>=1440px) {
-   
-}
-
-/*medium-desktop*/
-@media only screen and (width<=1439px) {
-    
-}
-
-/*small-desktop*/
-@media only screen and (width<=1279px) {
-    
-}
-
-/*tablet*/
-@media only screen and (width<=1023px) {
-    
-}
-
-/*big-phone*/
-@media only screen and (width<=767px) {
-
-}
-
 
 /*
     .card {
