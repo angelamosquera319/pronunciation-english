@@ -12,7 +12,7 @@ html, body {
   background-image: url("amarillo.png");
   /* 2. Ajusta la imagen para que cubra toda la pantalla */
   background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
-  background-position: center;
+  background-position: center center;
   /* 4. Evita que la imagen se repita como mosaico */
   background-repeat: no-repeat;
   /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
@@ -35,15 +35,17 @@ html, body {
 }
 
 .card {
-      background: rgba(255, 255, 255, 0.50);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
-      height: min(750px, 90vw);
-      overflow-y: scroll;
-      padding: 8px 24px;
+  background: rgba(255, 255, 255, 0.50);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  width: min(750px, 100%);    /* ancho fijo, sin pasarse en pantallas chicas */
+  height: min(600px, 100%);   /* alto fijo, sin pasarse en pantallas bajas */
+  padding: 16px 24px;
+  overflow-x: hidden;         /* nada se sale a los lados */
+  overflow-y: auto;           /* si hay mucho texto, scroll por dentro */
+  overflow-wrap: anywhere;    /* parte las palabras muy largas */
 }
 
 .card::-webkit-scrollbar { display: none; }
