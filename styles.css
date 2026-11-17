@@ -12,7 +12,7 @@ body {
   /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
   background-attachment: fixed;
   /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
-  min-height: 10vh;
+  min-height: 1vh;
 }
 
 /* Activa el fondo fijo solo en pantallas grandes (tablets horizontales y PC) */
