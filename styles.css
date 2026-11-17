@@ -1,167 +1,30 @@
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  padding: 24px 24px; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/*
-body {
-  background-color: #d0e1f9;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-.vocabulario {
-  color: #7f152e;
-  font-size:30px;
-  line-height:36px
-  font-weight: bold;
-  font-weight: 500;
-}
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
 
-.descripcion {
-  color: #000000;
-  font-size:28px;
-}
-*/
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f1e4f1; /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
+    }
 
-@media (min-width: 769px) {
-  body {
-  /* 1. Ruta de la imagen */
-  background-image: url("computador.png");
-  /* 2. Ajusta la imagen para que cubra toda la pantalla */
-  background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
-  background-position: center center;
-  /* 4. Evita que la imagen se repita como mosaico */
-  background-repeat: no-repeat;
-  /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
-  background-attachment: fixed;
-  /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
-  min-height: 100vh;
-
-.vocabulario {
-  color: #5B7C99;
-  font-size:30px;
-  line-height:36px
-  font-weight: bold;
-  font-weight: 500;
-  margin: 10px 15px 20px 25px;
-}
-
-.descripcion {
-  color: #000000;
-  font-size:24px;
-}
-
-      .card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      width: min(1025px, 90vw);
-      max-height: 80vh;
-      overflow-y: scroll;
-      padding: 8px 8px;
-      overflow-wrap: anywhere;
-}
-
-.card::-webkit-scrollbar { display: none; }
-.card { -ms-overflow-style: none; scrollbar-width: none; }
-  }
-}
-
-@media (min-width: 481px) {
-  body {
-  /* 1. Ruta de la imagen */
-  background-image: url("amarillo.png");
-  /* 2. Ajusta la imagen para que cubra toda la pantalla */
-  background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
-  background-position: center center;
-  /* 4. Evita que la imagen se repita como mosaico */
-  background-repeat: no-repeat;
-  /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
-  background-attachment: fixed;
-  /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
-  min-height: 100vh;
-  
-  .vocabulario {
-  color: #7f152e;
-  font-size:30px;
-  line-height:36px
-  font-weight: bold;
-  font-weight: 500;
-}
-
-.descripcion {
-  color: #000000;
-  font-size:28px;
-}
-
-.card {
-      background: rgba(255, 255, 255, 0.7);
+    .card {
+      background: rgba(255, 255, 255, 0.72);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
       width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
-      max-height: 100vh;
+      max-height: 80vh;
       overflow-y: scroll;
-      padding: 8px 8px;
-      overflow-wrap: anywhere;
-}
+      padding: 8px 24px;
+    }
+    .card::-webkit-scrollbar { display: none; }
+    .card { -ms-overflow-style: none; scrollbar-width: none; }
 
-.card::-webkit-scrollbar { display: none; }
-.card { -ms-overflow-style: none; scrollbar-width: none; }
-  }
-}
-
-
-/*
-@media (min-width: 1440px) {
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background-color: #d0e1f9;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-}
-*/
-
-/*
-@media (min-width: 768px) {
-  body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* 1. Ruta de la imagen */
-  background-image: url("amarillo.png");
-  /* 2. Ajusta la imagen para que cubra toda la pantalla */
-  background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
-  background-position: center center;
-  /* 4. Evita que la imagen se repita como mosaico */
-  background-repeat: no-repeat;
-  /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
-  background-attachment: fixed;
-  /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
-  min-height: 100vh;
-  }
-}
-*/
