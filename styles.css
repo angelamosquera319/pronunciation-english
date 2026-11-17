@@ -69,7 +69,7 @@ body {
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
-      width: min(750px, 160vw); /* ANCHO DE LA TARJETA */
+      width: min(790px, 160vw); /* ANCHO DE LA TARJETA */
       height: min(70px, 90vh); /* ANCHO DE LA TARJETA */
       /*max-height: 150vh;
       max-height: 150vh;*/
