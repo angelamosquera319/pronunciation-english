@@ -11,7 +11,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #f1e4f1; /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
+      background-color: #5B7C99; /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
     }
 
 @media only screen and (width <= 567px) {
