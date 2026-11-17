@@ -7,3 +7,17 @@ body {
   font-size:28px;
   line-height:36px
 }
+
+.terms-container {
+  display: flex;
+  flex-direction: column;
+  width: min(1088px, 100%);
+  margin: 0 auto;
+}
+
+.public-list__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);   /* una sola columna */
+  gap: 12px;
+  width: 100%;
+}
