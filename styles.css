@@ -3,7 +3,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha *
   /* 1. Ruta de la imagen */
-  background-image: url("azul.png");
+  background-image: url("amarillo.png");
   /* 2. Ajusta la imagen para que cubra toda la pantalla */
   background-size: cover; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
   background-position: center center;
@@ -18,7 +18,7 @@ body {
 /* Activa el fondo fijo solo en pantallas grandes (tablets horizontales y PC) */
 @media (min-width: 768px) {
   body {
-    background-image: url("amarillo.png");
+    background-image: url("azul.png");
     background-attachment: fixed;
       background-size: cover; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
   background-position: center;
