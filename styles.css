@@ -1,3 +1,74 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: #d0e1f9;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vocabulario {
+  color: #7f152e;
+  font-size:30px;
+  line-height:36px
+  font-weight: bold;
+  font-weight: 500;
+}
+
+.descripcion {
+  color: #000000;
+  font-size:28px;
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+  body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 24px 24px;   /* 24px arriba y abajo, 40px a izquierda y derecha */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 1. Ruta de la imagen */
+  background-image: url("computador.png");
+  /* 2. Ajusta la imagen para que cubra toda la pantalla */
+  background-size: cover; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
+  background-position: center center;
+  /* 4. Evita que la imagen se repita como mosaico */
+  background-repeat: no-repeat;
+  /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
+  background-attachment: fixed;
+  /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
+  min-height: 100vh;
+
+      .card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
+      max-height: 100vh;
+      overflow-y: scroll;
+      padding: 8px 8px;
+      overflow-wrap: anywhere;
+}
+
+.card::-webkit-scrollbar { display: none; }
+.card { -ms-overflow-style: none; scrollbar-width: none; }
+  }
+}
+
+
+
+
 @media (min-width: 1440px) {
 html, body {
     width: 100%;
@@ -36,31 +107,4 @@ html, body {
   }
 }
 
-.vocabulario {
-  color: #7f152e;
-  font-size:30px;
-  line-height:36px
-  font-weight: bold;
-  font-weight: 500;
-}
 
-.descripcion {
-  color: #000000;
-  font-size:28px;
-}
-
-.card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
-      max-height: 100vh;
-      overflow-y: scroll;
-      padding: 8px 8px;
-      overflow-wrap: anywhere;
-}
-
-.card::-webkit-scrollbar { display: none; }
-.card { -ms-overflow-style: none; scrollbar-width: none; }
