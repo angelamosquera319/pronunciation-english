@@ -49,14 +49,27 @@ body {
   /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
   min-height: 100vh;
 
+.vocabulario {
+  color: #5B7C99;
+  font-size:30px;
+  line-height:36px
+  font-weight: bold;
+  font-weight: 500;
+}
+
+.descripcion {
+  color: #000000;
+  font-size:28px;
+}
+
       .card {
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
-      width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
-      max-height: 100vh;
+      width: min(750px, 100vw); /* ANCHO DE LA TARJETA */
+      max-height: 150vh;
       overflow-y: scroll;
       padding: 8px 8px;
       overflow-wrap: anywhere;
