@@ -84,7 +84,7 @@
 /*small-phone*/
 @media only screen and (width<=567px) {
     body {
-      padding: 20px 24px 24px 24px;
+      padding: 10px 24px 24px 24px;
         /* 1. Ruta de la imagen */
   background-image: url("celular.png");
   /* 2. Ajusta la imagen para que cubra toda la pantalla */
@@ -111,7 +111,7 @@
 }
 
    .card {
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.10);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
