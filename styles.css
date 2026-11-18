@@ -31,7 +31,49 @@
 
 /*tablet*/
 @media only screen and (width<=1023px) {
-    
+   body {
+  /* 1. Ruta de la imagen */
+  background-image: url("amarillo.png");
+  /* 2. Ajusta la imagen para que cubra toda la pantalla */
+  background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
+  background-position: center center;
+  /* 4. Evita que la imagen se repita como mosaico */
+  background-repeat: no-repeat;
+  /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
+  background-attachment: fixed;
+  /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
+  min-height: 100vh;
+  
+  .vocabulario {
+  color: #7f152e;
+  font-size:30px;
+  line-height:36px
+  font-weight: bold;
+  font-weight: 500;
+}
+
+.descripcion {
+  color: #000000;
+  font-size:28px;
+}
+
+.card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
+      max-height: 100vh;
+      overflow-y: scroll;
+      padding: 8px 8px;
+      overflow-wrap: anywhere;
+}
+
+.card::-webkit-scrollbar { display: none; }
+.card { -ms-overflow-style: none; scrollbar-width: none; }
+  }
+   
 }
 
 /*big-phone*/
