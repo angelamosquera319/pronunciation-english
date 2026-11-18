@@ -1,0 +1,108 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1e4f1; /* COLOR DE FONDO DE LA PÁGINA */
+}
+
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
+  max-height: 80vh;
+  overflow-y: scroll;
+  padding: 8px 24px;
+}
+.card::-webkit-scrollbar { display: none; }
+.card { -ms-overflow-style: none; scrollbar-width: none; }
+
+.word-entry {
+  padding: 12px 0;
+}
+
+.word-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.word-title {
+  font-size: 28px; /* TAMAÑO LETRA PALABRA */
+  font-weight: 700;
+  color: #0f2a40;
+}
+
+.word-intro {
+  font-size: 18px; /* TAMAÑO LETRA INTRODUCCIÓN */
+  color: #1a3a55;
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+
+.def-list {
+  padding-left: 26px;
+}
+.def-list li {
+  margin-bottom: 16px;
+}
+.def-list li::marker {
+  font-weight: 700;
+  color: #0f2a40;
+}
+
+.def-text {
+  font-size: 18px; /* TAMAÑO LETRA DEFINICIÓN */
+  color: #1a3a55;
+  line-height: 1.55;
+}
+
+.example {
+  font-size: 17px; /* TAMAÑO LETRA EJEMPLO */
+  color: #1a3a55;
+  line-height: 1.55;
+  margin-top: 4px;
+}
+.example .translation {
+  font-style: italic;
+  color: #4a6a85;
+}
+
+/* Separador entre categorías de la misma palabra (sustantivo, verbo, etc.) */
+.category + .category {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #5a90bb; /* LÍNEA ENTRE CATEGORÍAS */
+}
+
+.play-btn {
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(80, 120, 170, 0.5);
+  background: rgba(255, 255, 255, 0.7);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: #3a6080;
+  font-size: 13px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.play-btn:hover { background: rgba(200, 220, 240, 0.8); border-color: #5a90bb; }
+.play-btn.playing {
+  background: rgba(180, 210, 240, 0.9);
+  border-color: #3a7ab0;
+  color: #1a4a70;
+}
