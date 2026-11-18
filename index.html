@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vocabulario</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -22,6 +23,7 @@
     }
 
     .card {
+      position: relative;
       background: rgba(255, 255, 255, 0.72);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -30,16 +32,26 @@
       width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
       max-height: 80vh;
       overflow-y: scroll;
-      padding: 16px 24px;
+      padding: 8px 24px;
     }
     .card::-webkit-scrollbar { display: none; }
     .card { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .word-entry {
+      padding: 12px 0;
+    }
+
+    .word-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
 
     .word-title {
       font-size: 28px; /* TAMAÑO LETRA PALABRA */
       font-weight: 700;
       color: #0f2a40;
-      margin-bottom: 8px;
     }
 
     .word-intro {
@@ -76,41 +88,133 @@
       font-style: italic;
       color: #4a6a85;
     }
+
+    .play-btn {
+      flex-shrink: 0;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(80, 120, 170, 0.5);
+      background: rgba(255, 255, 255, 0.7);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: #3a6080;
+      font-size: 13px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .play-btn:hover { background: rgba(200, 220, 240, 0.8); border-color: #5a90bb; }
+    .play-btn.playing {
+      background: rgba(180, 210, 240, 0.9);
+      border-color: #3a7ab0;
+      color: #1a4a70;
+    }
   </style>
 </head>
 <body>
 
-<div class="card">
+<div class="card" id="card">
 
-  <p class="word-title">One</p>
-  <p class="word-intro">Como sustantivo se usa en estos contextos:</p>
+  <!-- ================= PALABRA: One ================= -->
+  <!-- Para agregar otra palabra, copia todo este bloque .word-entry
+       y cambia data-word, data-audio y el contenido. -->
+  <div class="word-entry" data-word="One">
 
-  <ol class="def-list">
+    <div class="word-line">
+      <button class="play-btn" data-audio="audio/One.mp3" aria-label="Reproducir One">
+        <i class="ti ti-player-play"></i>
+      </button>
+      <p class="word-title">One</p>
+    </div>
 
-    <li>
-      <p class="def-text">Para nombrar el número 1 o la cifra, y la traducción es uno.</p>
-      <p class="example">Write a one on the board. <span class="translation">(Escribe un uno en la pizarra.)</span></p>
-    </li>
+    <p class="word-intro">Como sustantivo se usa en estos contextos:</p>
 
-    <li>
-      <p class="def-text">Para indicar la hora, y la traducción es la una.</p>
-      <p class="example">The meeting starts at one. <span class="translation">(La reunión empieza a la una.)</span></p>
-    </li>
+    <ol class="def-list">
 
-    <li>
-      <p class="def-text">De manera informal, para hablar de un billete de un dólar, y las traducciones son un billete de uno y un dólar.</p>
-      <p class="example">Do you have change for a five? <span class="translation">(¿Tienes cambio de un billete de cinco?)</span></p>
-      <p class="example">I only have ones. <span class="translation">(Solo tengo billetes de uno.)</span></p>
-    </li>
+      <li>
+        <p class="def-text">Para nombrar el número 1 o la cifra, y la traducción es uno.</p>
+        <p class="example">Write a one on the board. <span class="translation">(Escribe un uno en la pizarra.)</span></p>
+      </li>
 
-    <li>
-      <p class="def-text">Para hablar de personas con valor afectivo, en expresiones como “loved ones” o “little ones”, y las traducciones son ser querido y pequeño.</p>
-      <p class="example">She is thinking of her loved ones. <span class="translation">(Ella está pensando en sus seres queridos.)</span></p>
-    </li>
+      <li>
+        <p class="def-text">Para indicar la hora, y la traducción es la una.</p>
+        <p class="example">The meeting starts at one. <span class="translation">(La reunión empieza a la una.)</span></p>
+      </li>
 
-  </ol>
+      <li>
+        <p class="def-text">De manera informal, para hablar de un billete de un dólar, y las traducciones son un billete de uno y un dólar.</p>
+        <p class="example">Do you have change for a five? <span class="translation">(¿Tienes cambio de un billete de cinco?)</span></p>
+        <p class="example">I only have ones. <span class="translation">(Solo tengo billetes de uno.)</span></p>
+      </li>
+
+      <li>
+        <p class="def-text">Para hablar de personas con valor afectivo, en expresiones como “loved ones” o “little ones”, y las traducciones son ser querido y pequeño.</p>
+        <p class="example">She is thinking of her loved ones. <span class="translation">(Ella está pensando en sus seres queridos.)</span></p>
+      </li>
+
+    </ol>
+  </div>
+  <!-- ================= FIN: One ================= -->
 
 </div>
 
+<!-- Este script NO crea contenido: solo maneja el audio y el scroll. -->
+<script>
+  const card = document.getElementById("card");
+  const playIcon  = '<i class="ti ti-player-play"></i>';
+  const pauseIcon = '<i class="ti ti-player-pause"></i>';
+
+  let currentAudio = null;
+  let currentBtn   = null;
+
+  function resetBtn(btn) {
+    btn.innerHTML = playIcon;
+    btn.classList.remove("playing");
+  }
+
+  // Audio: funciona con cualquier botón .play-btn que tenga data-audio
+  card.addEventListener("click", (e) => {
+    const btn = e.target.closest(".play-btn");
+    if (!btn) return;
+
+    // Si ya hay un audio sonando, se detiene
+    if (currentAudio && !currentAudio.paused) {
+      currentAudio.pause();
+      resetBtn(currentBtn);
+      const same = currentBtn === btn;
+      currentAudio = null;
+      currentBtn = null;
+      if (same) return;
+    }
+
+    const audio = new Audio(btn.dataset.audio);
+    currentAudio = audio;
+    currentBtn = btn;
+
+    btn.innerHTML = pauseIcon;
+    btn.classList.add("playing");
+
+    // Recuerda la última palabra estudiada en la URL (?word=One)
+    const word = btn.closest(".word-entry")?.dataset.word;
+    if (word) history.replaceState(null, "", `?word=${encodeURIComponent(word)}`);
+
+    audio.play().catch(() => resetBtn(btn));
+    audio.addEventListener("ended", () => {
+      resetBtn(btn);
+      currentAudio = null;
+      currentBtn = null;
+    });
+  });
+
+  // Scroll: al cargar, baja hasta la última palabra estudiada
+  const savedWord = new URLSearchParams(window.location.search).get("word");
+  if (savedWord) {
+    const target = [...document.querySelectorAll(".word-entry")]
+      .find(el => el.dataset.word === savedWord);
+    if (target) {
+      setTimeout(() => {
+        card.scrollTo({ top: target.offsetTop - 16, behavior: "smooth" });
+      }, 100);
+    }
+  }
+</script>
 </body>
 </html>
