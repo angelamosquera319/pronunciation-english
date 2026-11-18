@@ -11,6 +11,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 24px 24px; 
       /*background-color: #f1e4f1;*/ /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
     }
 
@@ -69,13 +70,13 @@
 }
 
    .card {
-      background: rgba(255, 255, 255, 0.50);
+      background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
       width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
-      height: min(750px, 90vh);
+      max-height: 100vh;
       overflow-y: scroll;
       padding: 10px 10px;
       overflow-wrap: anywhere;
