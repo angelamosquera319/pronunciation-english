@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vocabulario</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -18,7 +18,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #f1e4f1; /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
+      background-color: #f1e4f1; /* COLOR DE FONDO DE LA PÁGINA */
     }
 
     .card {
@@ -30,20 +30,87 @@
       width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
       max-height: 80vh;
       overflow-y: scroll;
-      padding: 8px 24px;
+      padding: 16px 24px;
     }
     .card::-webkit-scrollbar { display: none; }
     .card { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .word-title {
+      font-size: 28px; /* TAMAÑO LETRA PALABRA */
+      font-weight: 700;
+      color: #0f2a40;
+      margin-bottom: 8px;
+    }
+
+    .word-intro {
+      font-size: 18px; /* TAMAÑO LETRA INTRODUCCIÓN */
+      color: #1a3a55;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .def-list {
+      padding-left: 26px;
+    }
+    .def-list li {
+      margin-bottom: 16px;
+    }
+    .def-list li::marker {
+      font-weight: 700;
+      color: #0f2a40;
+    }
+
+    .def-text {
+      font-size: 18px; /* TAMAÑO LETRA DEFINICIÓN */
+      color: #1a3a55;
+      line-height: 1.55;
+    }
+
+    .example {
+      font-size: 17px; /* TAMAÑO LETRA EJEMPLO */
+      color: #1a3a55;
+      line-height: 1.55;
+      margin-top: 4px;
+    }
+    .example .translation {
+      font-style: italic;
+      color: #4a6a85;
+    }
   </style>
 </head>
 <body>
 
-<div class="card" id="card">
-    <p style="color:#07579c; font-size: 30px;">One</p>
-    <p>Como sustantivo se usa en estos contextos:</p>
-    <ol>
-      <li>Para nombrar  el número 1 la ci.<br>Write a one on the board. (Escribe un uno en la pizarra.)</li>
-    </ol>
+<div class="card">
+
+  <p class="word-title">One</p>
+  <p class="word-intro">Como sustantivo se usa en estos contextos:</p>
+
+  <ol class="def-list">
+
+    <li>
+      <p class="def-text">Para nombrar el número 1 o la cifra, y la traducción es uno.</p>
+      <p class="example">Write a one on the board. <span class="translation">(Escribe un uno en la pizarra.)</span></p>
+    </li>
+
+    <li>
+      <p class="def-text">Para indicar la hora, y la traducción es la una.</p>
+      <p class="example">The meeting starts at one. <span class="translation">(La reunión empieza a la una.)</span></p>
+    </li>
+
+    <li>
+      <p class="def-text">De manera informal, para hablar de un billete de un dólar, y las traducciones son un billete de uno y un dólar.</p>
+      <p class="example">Do you have change for a five? <span class="translation">(¿Tienes cambio de un billete de cinco?)</span></p>
+      <p class="example">I only have ones. <span class="translation">(Solo tengo billetes de uno.)</span></p>
+    </li>
+
+    <li>
+      <p class="def-text">Para hablar de personas con valor afectivo, en expresiones como “loved ones” o “little ones”, y las traducciones son ser querido y pequeño.</p>
+      <p class="example">She is thinking of her loved ones. <span class="translation">(Ella está pensando en sus seres queridos.)</span></p>
+    </li>
+
+  </ol>
+
 </div>
+
 </body>
 </html>
