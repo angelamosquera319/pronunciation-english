@@ -1,135 +1,19 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      width: 100%;       
+      width: 100%;
       height: 100%;
       overflow: hidden;
     }
 
     body {
-      font-family: Roboto, "Helvetica Neue", sans-serif;
+      font-family: Arial, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-       /*background-color: #f1e4f1;*/ /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
+      background-color: #f1e4f1; /* COLOR DE FONDO DE LA PÁGINA (el lila de la tarjeta de Oxford) */
     }
 
-
-@media only screen and (width>=1440px) {
-   
-}
-
-/*medium-desktop*/
-@media only screen and (width<=1439px) {
-    
-}
-
-/*small-desktop*/
-@media only screen and (width<=1279px) {
-    
-}
-
-/*tablet*/
-@media only screen and (width<=1023px) {
-   body {
-  /* 1. Ruta de la imagen */
-  background-image: url("amarillo.png");
-  /* 2. Ajusta la imagen para que cubra toda la pantalla */
-  background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
-  background-position: center center;
-  /* 4. Evita que la imagen se repita como mosaico */
-  background-repeat: no-repeat;
-  /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
-  background-attachment: fixed;
-  /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
-  min-height: 100vh;
-  
-  .vocabulario {
-  color: #7f152e;
-  font-size:30px;
-  line-height:36px
-  font-weight: bold;
-  font-weight: 500;
-}
-
-.descripcion {
-  color: #000000;
-  font-size:28px;
-  padding: 0 0 0 5px;
-}
-
-.card {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
-      max-height: min(750px, 80vh);
-      overflow-y: scroll;
-      padding: 8px 8px;
-      overflow-wrap: anywhere;
-}
-
-.card::-webkit-scrollbar { display: none; }
-.card { -ms-overflow-style: none; scrollbar-width: none; }
-  }
-   
-}
-
-/*big-phone*/
-@media only screen and (width<=767px) {
-
-}
-
-/*small-phone*/
-@media only screen and (width<=567px) {
-    body {
-      padding: 10px 24px 24px 24px;
-        /* 1. Ruta de la imagen */
-  background-image: url("celular.png");
-  /* 2. Ajusta la imagen para que cubra toda la pantalla */
-  background-size: 100% 100%; /* Ancho 100% y Alto 100% exactos */  /* 3. Centra la imagen */
-  background-position: center center;
-  /* 4. Evita que la imagen se repita como mosaico */
-  background-repeat: no-repeat;
-  /* 5. Mantiene el fondo fijo al hacer scroll (opcional) */
-  background-attachment: fixed;
-  /* 6. Asegura que el body ocupe al menos el 100% del alto de la pantalla */
-  min-height: 100vh;
-
-.vocabulario {
-  color: #C00000;
-  font-size:30px;
-  line-height:30px
-  font-weight: bold;
-  font-weight: 500;
-}
-
-.descripcion {
-  color: #000000;
-  font-size:24px;
-}
-
-   .card {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
-      /*height: min(750px, 80vh);*/
-      max-height: 100vh;
-      overflow-y: scroll;
-      padding: 8px 8px;
-      overflow-wrap: anywhere;
-    }
-    .card::-webkit-scrollbar { display: none; }
-    .card { -ms-overflow-style: none; scrollbar-width: none; }
-    }   
-}
-
-/*
     .card {
       background: rgba(255, 255, 255, 0.72);
       backdrop-filter: blur(12px);
@@ -137,12 +21,9 @@
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.6);
       width: min(750px, 90vw); /* ANCHO DE LA TARJETA */
-      max-height: 900vh;
+      max-height: 80vh;
       overflow-y: scroll;
-      padding: 8px 8px;
-      overflow-wrap: anywhere;
+      padding: 8px 24px;
     }
     .card::-webkit-scrollbar { display: none; }
     .card { -ms-overflow-style: none; scrollbar-width: none; }
-
-*/
