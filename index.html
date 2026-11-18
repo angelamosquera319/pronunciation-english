@@ -89,6 +89,13 @@
       color: #4a6a85;
     }
 
+    /* Separador entre categorías de la misma palabra (sustantivo, verbo, etc.) */
+    .category + .category {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px dashed rgba(100, 140, 180, 0.3);
+    }
+
     .play-btn {
       flex-shrink: 0;
       width: 30px; height: 30px;
@@ -119,11 +126,14 @@
   <div class="word-entry" data-word="One">
 
     <div class="word-line">
-      <button class="play-btn" data-audio="audio/one.mp3" aria-label="Reproducir One">
+      <button class="play-btn" data-audio="audio/One.mp3" aria-label="Reproducir One">
         <i class="ti ti-player-play"></i>
       </button>
       <p class="word-title">One</p>
     </div>
+
+    <!-- ===== CATEGORÍA: sustantivo ===== -->
+    <div class="category">
 
     <p class="word-intro">Como sustantivo se usa en estos contextos:</p>
 
@@ -151,8 +161,68 @@
       </li>
 
     </ol>
+    </div>
+    <!-- ===== FIN CATEGORÍA: sustantivo ===== -->
+
+    <!-- Para agregar otra categoría (verbo, adjetivo, etc.), copia este bloque
+         y pégalo aquí abajo, dentro del mismo .word-entry:
+
+    <div class="category">
+      <p class="word-intro">Como verbo se usa en estos contextos:</p>
+      <ol class="def-list">
+        <li>
+          <p class="def-text">Definición.</p>
+          <p class="example">English sentence. <span class="translation">(Traducción.)</span></p>
+        </li>
+      </ol>
+    </div>
+    -->
+
   </div>
   <!-- ================= FIN: One ================= -->
+
+  <!-- ================= PALABRA: Drink ================= -->
+  <div class="word-entry" data-word="Drink">
+
+    <div class="word-line">
+      <button class="play-btn" data-audio="audio/Drink.mp3" aria-label="Reproducir Drink">
+        <i class="ti ti-player-play"></i>
+      </button>
+      <p class="word-title">Drink</p>
+    </div>
+
+    <!-- ===== CATEGORÍA: sustantivo ===== -->
+    <div class="category">
+      <p class="word-intro">Como sustantivo se usa en estos contextos:</p>
+      <ol class="def-list">
+        <li>
+          <p class="def-text">Para nombrar un líquido que se bebe, y la traducción es bebida.</p>
+          <p class="example">Would you like a drink? <span class="translation">(¿Quieres una bebida?)</span></p>
+        </li>
+        <li>
+          <p class="def-text">Para hablar de una bebida alcohólica, y la traducción es trago.</p>
+          <p class="example">Let's go out for a drink. <span class="translation">(Salgamos a tomar un trago.)</span></p>
+        </li>
+      </ol>
+    </div>
+
+    <!-- ===== CATEGORÍA: verbo ===== -->
+    <div class="category">
+      <p class="word-intro">Como verbo se usa en estos contextos:</p>
+      <ol class="def-list">
+        <li>
+          <p class="def-text">Para hablar de tomar un líquido, y la traducción es beber.</p>
+          <p class="example">I drink water every day. <span class="translation">(Bebo agua todos los días.)</span></p>
+        </li>
+        <li>
+          <p class="def-text">Para hablar de consumir alcohol, y la traducción es tomar.</p>
+          <p class="example">He doesn't drink. <span class="translation">(Él no toma.)</span></p>
+        </li>
+      </ol>
+    </div>
+
+  </div>
+  <!-- ================= FIN: Drink ================= -->
 
 </div>
 
